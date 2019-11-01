@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "meetmypsy-ugm-9362d",
+  "private_key_id": "ef6cc0d898d9de7a50b1a57db1115067d645bf96",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC30dtKQepmhUyr\nCBaiRfxSkivJKBsalDdfAi6GBm9syyYxsWlGMVeTPq2d74jAwJavA8zyHgafqqv5\nBeu2XjD02IbdaCUhK+NdtSFmsH88hGDUt3BdwOMBMfjto9lzHxI/mJIP/YED6umn\noQGA3uKZJtaHydGVNM6ok37cmwkSzxpgUc+iniYgUAGVvWOgrcK5hYr+/kTzlo47\nFhuLeWohbrLFMMoOzBiZZrF0mQZ7K9/WVzQFKj0QPWj0rACCrIWL+KCQmsrrfCiJ\n4Y1wxrOwAueEiWsIRH5ZkGre0EQLdC+zZE6JaPxM12Ca2YDuczDtTzs317ymn3c6\npiqyc3c1AgMBAAECggEAB03Mha9hUDU8Bha4vLY4FkYH43YKjHX259/gqxAlGMcb\n3sEcVcu4alm4Kp/Q+/6BbkJVJopIlcsOPfaWtotL4DEc7yRU4PP+VIo4LpbVDQZ7\nvEmh3bcAMU6D3aagFjz8Xv0IHrnVe/gEITynRrB0g55BfqmnZq/8UlvyYD/wlOft\nXG8qfVgQrryfKn1YSM4lQXj9DD3Y4JDwSeScmOh07NrsVHBVYf5PZl7bDdbiaNk/\nGzn051/As56wEktGB8F9ibBIpyPfFaVZg7twQZuRPXKUtqhD4/LIho8pfgU9q9AI\nS+Y2H8P/8OSCD7HcTh7jkpFBknsZ8hFpsFcBUXoM0QKBgQDr3mkHh4tUKPfI2Vws\nsi+SBzaVbGADaqKIFaDVhDdnEJ4FDmzbFVRe+Como0i1n7vT89lsH8o1GkhH+0eS\nimRGfHd2GxRi2CSA4pDNi8KC4KPlotBvYZcF3h+M+3gT2bdERpXndM0i20FFo8Vj\nDukpF/4TJ2AaxXDrY+NW4tw7ZQKBgQDHgjTcNXbEiX1No9iHdL1tD55RFIS7uJ8U\nhVQTZIXMGaxC/nrjYt1kM6RI4fahEta6o/I9KkJZaXdOAtSVEvTHOELW02W3cXHb\npA5jPACSuUd3YE06NpWD81qQuj5PNJBhTvWEbENcgRl5dr1ejpt8ZZx8gLBflBov\nl0itq0TXkQKBgG7OeYD0CFxtMprEoizNONPdV6My2phATEKqBnjIOE7O2618bV8u\n0ggbhZHJO6s3c0HLWOUWuiPgSPyn66PIJ/uFFYoChr041U1HIsetVJ+vcM+8gTcS\nHaTACQpuSKbqrNICZwHpOUWawzs4CM7UfmyzvMS6xsdM4hNzRaXXxaaRAoGAVUMo\nJBQVNdksW8nx97HEYp+SIUSLlU5JbhOs4rzLEXbHT7pB+nt98hy/0QYAyMWsTwdR\ntyIgSOXxvr0m7K61PY6lwfmGNuecqSlrnK0/8XSNPk9Bsecx7rpJsiBmEKN+MJf2\nBSnff+EMagR82bRIbtleDzdQKQi6SCx3OwE+4oECgYBFO78cHyY7wdC5vVpbUQaA\nOrvqDbmXiLyXOei2dzIgofMHK1GYbU99lSk6neMr439d117xRNPY9RgR+JSz300e\n+t0PG1dPQrB4k+x+2vw/02gD26+Fjfopx0pSm+NrQ8tq9qoIc+z3yI0uJXvVYq6K\npFQRCev2A84WtFj6/Mx+Qw==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-jseou@meetmypsy-ugm-9362d.iam.gserviceaccount.com",
+  "client_id": "115439654061108820283",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-jseou%40meetmypsy-ugm-9362d.iam.gserviceaccount.com"
+}

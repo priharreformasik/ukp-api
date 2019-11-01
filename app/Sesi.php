@@ -1,0 +1,22 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class Sesi extends Model
+{
+	use SoftDeletes;
+    protected $dates = ['deleted_at'];
+
+    protected $table = 'sesi';
+    protected $fillable = ['id','nama','jam'];
+    public $timestamps = true;
+    //protected $dates = ['deleted_at', 'tanggal_lahir'];
+
+   	public function jadwal()
+    {
+        return $this->hasMany('App\Jadwal', 'sesi_id', 'id');
+    }
+}
