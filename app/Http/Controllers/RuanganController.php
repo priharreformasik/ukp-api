@@ -111,11 +111,26 @@ class RuanganController extends Controller
     }
 
     
+    // public function destroy($id)
+    // {
+    //   $data = Ruangan::find($id)->delete();
+    //   Alert::success('Berhasil!','Data Berhasil Dihapus');
+    //   return response()->json(['success'=>"Data Deleted successfully.", 'tr'=>'tr_'.$id]);
+    // }
+
     public function destroy($id)
     {
-      $data = Ruangan::find($id)->delete();
-      Alert::success('Berhasil!','Data Berhasil Dihapus');
-      return response()->json(['success'=>"Data Deleted successfully.", 'tr'=>'tr_'.$id]);
+      $data = Ruangan::find($id);
+      $ruangan = Jadwal::where('ruangan_id', $data->id)->get()->count();
+      if (($ruangan) > 0) {
+        return response()->json([
+          'status'=>'failed',
+          'message'=>'Data sudah digunakan pada tabel lain!'
+        ]);
+      } else {
+        $data->delete();
+        return response()->json($data);
+      }
     }
 
     // public function withTrashed()

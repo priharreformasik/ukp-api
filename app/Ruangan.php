@@ -11,7 +11,7 @@ class Ruangan extends Model
     protected $dates = ['deleted_at'];
 
     protected $table = 'ruangan';
-    protected $fillable = ['id','nama','deskripsi'];
+    protected $fillable = ['id','nama','deskripsi','layanan_id'];
     public $timestamps = true;
     //protected $dates = ['deleted_at', 'tanggal_lahir'];
 

@@ -50,6 +50,8 @@
     46 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
     47 => 'RealRashid\\SweetAlert\\SweetAlertServiceProvider',
     48 => 'LaravelFCM\\FCMServiceProvider',
+    49 => 'Way\\Generators\\GeneratorsServiceProvider',
+    50 => 'Xethron\\MigrationsGenerator\\MigrationsGeneratorServiceProvider',
   ),
   'eager' => 
   array (
@@ -84,6 +86,8 @@
     28 => 'App\\Providers\\RouteServiceProvider',
     29 => 'Maatwebsite\\Excel\\ExcelServiceProvider',
     30 => 'RealRashid\\SweetAlert\\SweetAlertServiceProvider',
+    31 => 'Way\\Generators\\GeneratorsServiceProvider',
+    32 => 'Xethron\\MigrationsGenerator\\MigrationsGeneratorServiceProvider',
   ),
   'deferred' => 
   array (

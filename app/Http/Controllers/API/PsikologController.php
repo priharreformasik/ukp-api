@@ -2,14 +2,15 @@
 namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Auth;
 use App\Psikolog;
 use App\User;
 use App\Keahlian;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Validator;
 use App\Lib\Helper;
 use App\Jadwal;
+use DB;
 
 class PsikologController extends Controller
 {
@@ -115,6 +116,23 @@ public $successStatus = 200;
             ['jadwal'=>$list]);
         }
 
+    // public function jadwal_konsultasi(){
+
+    //   $psikolog = User::find(Auth::user()->id)->psikolog()->first()->id;
+    //   // dd($psikolog);
+
+    //   $list = DB::table('jadwal')->where('psikolog_id', $psikolog)
+    //                   ->select('jadwal.*')
+    //                   ->leftjoin('status','status.id','=','jadwal.status_id')
+    //                   ->where('status.nama','=','Terjadwal')
+    //                  ->orWhere('status.nama','=','Menunggu Konfirmasi')
+    //                   // ->with(['status','layanan','klien.user','sesi','ruangan'])
+    //                   ->get();
+    //                     // dd($list);
+    //   return response()->json(
+    //     ['jadwal'=>$list]
+    //   );
+    // }
 
     public function alihkan_permintaan(){
       $list = Jadwal::leftjoin('status','status.id','=','jadwal.status_id')

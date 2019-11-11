@@ -11,7 +11,7 @@ class Sesi extends Model
     protected $dates = ['deleted_at'];
 
     protected $table = 'sesi';
-    protected $fillable = ['id','nama','jam'];
+    protected $fillable = ['id','nama','jam','layanan_id'];
     public $timestamps = true;
     //protected $dates = ['deleted_at', 'tanggal_lahir'];
 

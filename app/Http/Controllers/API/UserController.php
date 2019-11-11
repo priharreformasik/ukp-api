@@ -52,21 +52,13 @@ public $successStatus = 200;
 
     public function loginPsikolog(Request $request){
         if(Auth::attempt([
-            'username' => request('username'),
+            'email' => request('email'),
             'password' => request('password'),
             'level' => 'Psikolog'
         ])){
-          $user = Auth::user();
-          $id = $request->get('id');
-          $name = $request->get('name');
-          $username = $request->get('username');
-          $email = $request->get('email');
-          $success['id'] = $id;
-          $success['name'] = $name;
-          $success['username_id'] = $username;
-          $success['email'] = $email;
-          $success['token'] =  $user->createToken('MyApp')-> accessToken;
-            return response()->json(["user"=>$success], $this-> successStatus);
+            $user = Auth::user();
+            $success['token'] =  $user->createToken('MyApp')-> accessToken;
+            return response()->json($success, $this-> successStatus);
         }
         else{
             $success['error'] = 'Unauthorised';
