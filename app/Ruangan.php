@@ -19,5 +19,10 @@ class Ruangan extends Model
     {
         return $this->hasMany('App\Jadwal', 'ruangan_id', 'id');
     }
+
+    public function layanan()
+    {
+        return $this->belongsTo('App\Layanan', 'layanan_id', 'id');
+    }
 }
 

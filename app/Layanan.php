@@ -23,5 +23,15 @@ class Layanan extends Model
     {
         return $this->belongsToMany('App\Psikolog', 'layanan_psikolog', 'psikolog_id', 'layanan_id');
     }
+
+    public function sesi()
+    {
+        return $this->hasMany('App\Sesi', 'layanan_id', 'id');
+    }
+
+    public function ruangan()
+    {
+        return $this->hasMany('App\Ruangan', 'layanan_id', 'id');
+    }
    
 }

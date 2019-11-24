@@ -53,5 +53,9 @@ class Jadwal extends Model
     {
         return $this->belongsTo('App\Status', 'status_id', 'id');
     }
+    public function transaksi()
+    {
+        return $this->hasMany('App\Transaksi', 'jadwal_id', 'id');
+    }
 
 }

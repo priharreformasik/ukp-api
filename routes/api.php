@@ -105,7 +105,7 @@ Route::put('/psikolog/update_biodata/{id}', 'API\PsikologController@update_bioda
 
 Route::put('/psikolog/update_layanan/{id}', 'API\PsikologController@update_layanan');
 Route::middleware('api')->get('/psikolog/riwayat','API\PsikologController@riwayat_konsultasi');
-Route::middleware('api')->get('/psikolog/jadwal','API\PsikologController@jadwal_konsultasi');
+Route::middleware('auth:api')->get('/psikolog/jadwal','API\PsikologController@jadwal_konsultasi');
 Route::middleware('api')->get('/psikolog/permintaan_klien','API\PsikologController@permintaan_klien');
 Route::middleware('api')->get('/psikolog/cari_klien','API\PsikologController@cari_klien');
 

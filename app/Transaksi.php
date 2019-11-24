@@ -13,8 +13,13 @@ class Transaksi extends Model
     protected $fillable = ['id','biaya_registrasi','foto','jadwal_id','harga'];
     public $timestamps = true;
 
-    // public function status()
-    // {
-    //     return $this->belongsTo('App\Status', 'status_id', 'id');
-    // }
+    public function transaksi_asesmen()
+    {
+        return $this->hasMany('App\TransaksiAsesmen', 'transaksi_id', 'id');
+    }
+
+    public function jadwal()
+    {
+        return $this->belongsTo('App\Jadwal', 'jadwal_id', 'id');
+    }
 }
