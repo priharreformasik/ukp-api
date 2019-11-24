@@ -33,5 +33,10 @@ class Layanan extends Model
     {
         return $this->hasMany('App\Ruangan', 'layanan_id', 'id');
     }
+
+    public function asesmen()
+    {
+        return $this->hasMany('App\AsesmenCharge', 'layanan_id', 'id');
+    }
    
 }

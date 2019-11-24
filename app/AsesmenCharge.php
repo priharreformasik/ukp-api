@@ -17,4 +17,10 @@ class AsesmenCharge extends Model
     {
         return $this->hasMany('App\TransaksiAsesmen', 'asesmen_id', 'id');
     }
+
+    public function layanan()
+    {
+        return $this->belongsTo('App\Layanan', 'layanan_id', 'id');
+    }
+
 }

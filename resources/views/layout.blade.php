@@ -166,9 +166,8 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="{{url('data/layanan')}}"><i class="fa fa-circle-o"></i> Jenis Layanan & Tarif</a></li>
-<!--             <li><a href="{{url('data/tes')}}"><i class="fa fa-circle-o"></i> Jenis Tes & Tarif</a></li>
- -->            <li><a href="{{url('data/kategori')}}"><i class="fa fa-circle-o"></i> Kategori Klien</a></li>
-            <!-- <li><a href="{{url('data/keahlian')}}"><i class="fa fa-circle-o"></i> Keahlian Psikolog</a></li> -->
+            <li><a href="{{url('data/kategori')}}"><i class="fa fa-circle-o"></i> Kategori Klien</a></li>
+            <li><a href="{{url('data/asesmen')}}"><i class="fa fa-circle-o"></i> Asesmen</a></li>
             <li><a href="{{url('data/ruangan')}}"><i class="fa fa-circle-o"></i> Ruangan</a></li>
             <li><a href="{{url('data/sesi')}}"><i class="fa fa-circle-o"></i> Sesi</a></li>
             <li><a href="{{url('data/status')}}"><i class="fa fa-circle-o"></i> Status</a></li>
@@ -176,6 +175,9 @@
         </li>
         <li class="{{ request()->is('jadwal') ? 'active' : ''}}">
           <a href="{{url('jadwal')}}"><i class="fa fa-calendar-check-o"></i> <span>Jadwal Konsultasi</span></a>
+        </li>
+        <li class="{{ request()->is('transaksi') ? 'active' : ''}}">
+          <a href="{{url('transaksi')}}"><i class="fa fa-money"></i> <span>Transaksi</span></a>
         </li>
         <li class="treeview">
           <a href="{{url('#')}}">
@@ -200,7 +202,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="{{url('pengaturan/aproval')}}"><i class="fa fa-circle-o"></i> Approval Jadwal</a></li>
-            <li><a href="{{url('pengaturan/aproval/psikolog')}}"><i class="fa fa-circle-o"></i> Approval Psikolog</a></li>
+            <!-- <li><a href="{{url('pengaturan/aproval/psikolog')}}"><i class="fa fa-circle-o"></i> Approval Psikolog</a></li> -->
             <li><a href="{{url('pengaturan/pesan')}}"><i class="fa fa-circle-o"></i> Pesan</a></li>
           </ul>
         </li>        

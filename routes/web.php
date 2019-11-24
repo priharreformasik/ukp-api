@@ -168,19 +168,24 @@ Route::post('data/layanan/{id}/edit_foto', 'LayananController@update_foto');
 Route::delete('data/layanan/{id}/delete', 'LayananController@destroy');
 /*END OF LAYANAN*/
 
-/*START OF TES*/
-Route::get('data/tes', 'TesController@index');
+/*START OF ASESMEN*/
+Route::get('data/asesmen', 'AsesmenController@index');
+Route::get('data/asesmen/tambah','AsesmenController@create');
 
-Route::get('data/tes/tambah','TesController@create');
-Route::post('data/tes/simpan', 'TesController@store');
+Route::post('data/asesmen/simpan', 'AsesmenController@store');
+Route::get('data/asesmen/{id}/detail', 'AsesmenController@detail');
 
-//Route::get('data/tes/{id}/detail', 'LayananController@detail');
+Route::get('data/asesmen/{id}/edit', 'AsesmenController@edit');
+Route::post('data/asesmen/{id}/edit', 'AsesmenController@update');
 
-Route::get('data/tes/{id}/edit', 'TesController@edit');
-Route::post('data/tes/{id}/edit', 'TesController@update');
+Route::get('data/asesmen/{id}/edit_foto', 'AsesmenController@edit_foto');
+Route::post('data/asesmen/{id}/edit_foto', 'AsesmenController@update_foto');
 
-Route::delete('data/tes/{id}/delete', 'TesController@destroy');
-/*END OF TES*/
+Route::delete('data/asesmen/{id}/delete', 'AsesmenController@destroy');
+/*END OF ASESMEN*/
+
+
+
 /*START OF KATEGORI*/
 Route::get('data/kategori', 'KategoriController@index');
 
