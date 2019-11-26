@@ -15,9 +15,12 @@ class CreateLayananTable extends Migration {
 		Schema::create('layanan', function(Blueprint $table)
 		{
 			$table->integer('id', true);
-			$table->string('nama', 100);
-			$table->string('deskripsi');
+			$table->string('nama');
+			$table->text('deskripsi', 65535);
 			$table->integer('harga');
+			$table->string('foto')->nullable();
+			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

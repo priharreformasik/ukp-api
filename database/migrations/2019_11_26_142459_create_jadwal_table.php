@@ -15,16 +15,16 @@ class CreateJadwalTable extends Migration {
 		Schema::create('jadwal', function(Blueprint $table)
 		{
 			$table->integer('id', true);
-			$table->string('hari', 25);
 			$table->date('tanggal');
-			$table->string('jam', 30)->nullable();
+			$table->integer('sesi_id')->index('sesi_id');
 			$table->integer('klien_id')->nullable()->index('klien_id');
 			$table->text('keluhan', 65535)->nullable();
 			$table->integer('layanan_id')->nullable()->index('layanan_id');
-			$table->integer('tes_id')->nullable()->index('tes_id');
 			$table->integer('ruangan_id')->nullable()->index('ruangan_id');
 			$table->integer('psikolog_id')->nullable()->index('jadwal_ibfk_1');
-			$table->enum('status', array('Terjadwal','Selesai','Konfirmasi','Belum Konfirmasi'))->nullable();
+			$table->integer('status_id')->nullable()->index('status_id');
+			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

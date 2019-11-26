@@ -15,14 +15,15 @@ class CreateKlienTable extends Migration {
 		Schema::create('klien', function(Blueprint $table)
 		{
 			$table->integer('id', true);
-			$table->enum('pendidikan_terakhir', array('SD','SMP','SMA','S1','S2','S3'));
-			$table->integer('anak_ke');
-			$table->integer('jumlah_saudara');
-			$table->integer('user_id')->unsigned()->nullable();
-			$table->integer('created_by')->nullable();
-			$table->integer('updated_by')->nullable();
+			$table->enum('pendidikan_terakhir', array('SD','SMP','SMA','D3','S1','S2','S3'));
+			$table->integer('anak_ke')->nullable();
+			$table->integer('jumlah_saudara')->nullable();
+			$table->integer('user_id')->unsigned()->nullable()->index('klien_ibfk_1');
 			$table->timestamps();
 			$table->softDeletes();
+			$table->integer('kategori_id')->nullable()->index('kategori_id');
+			$table->integer('parent_id')->nullable();
+			$table->string('hub_pendaftar', 50)->nullable();
 		});
 	}
 

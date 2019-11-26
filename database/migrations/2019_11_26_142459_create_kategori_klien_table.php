@@ -15,7 +15,10 @@ class CreateKategoriKlienTable extends Migration {
 		Schema::create('kategori_klien', function(Blueprint $table)
 		{
 			$table->integer('id', true);
-			$table->string('deskripsi');
+			$table->string('nama', 191);
+			$table->text('deskripsi', 65535)->nullable();
+			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

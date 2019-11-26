@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreatePsikologTable extends Migration {
+class CreatePesanUserTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,15 +12,11 @@ class CreatePsikologTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('psikolog', function(Blueprint $table)
+		Schema::create('pesan_user', function(Blueprint $table)
 		{
 			$table->integer('id', true);
-			$table->string('gelar', 40)->nullable();
-			$table->string('no_sipp', 100)->nullable();
-			$table->integer('keahlian_id')->nullable()->index('keahlian_id');
 			$table->integer('user_id')->unsigned()->nullable()->index('user_id');
-			$table->integer('created_by')->nullable();
-			$table->integer('updated_by')->nullable();
+			$table->integer('pesan_id')->nullable()->index('pesan_id');
 			$table->timestamps();
 			$table->softDeletes();
 		});
@@ -34,7 +30,7 @@ class CreatePsikologTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('psikolog');
+		Schema::drop('pesan_user');
 	}
 
 }

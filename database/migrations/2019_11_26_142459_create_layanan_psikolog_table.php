@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateRuanganTable extends Migration {
+class CreateLayananPsikologTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,10 +12,11 @@ class CreateRuanganTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('ruangan', function(Blueprint $table)
+		Schema::create('layanan_psikolog', function(Blueprint $table)
 		{
 			$table->integer('id', true);
-			$table->string('deskripsi', 40)->nullable();
+			$table->integer('layanan_id')->index('fk_layanan_psikolog_layanan');
+			$table->integer('psikolog_id')->index('fk_layanan_psikolog_psikolog');
 		});
 	}
 
@@ -27,7 +28,7 @@ class CreateRuanganTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('ruangan');
+		Schema::drop('layanan_psikolog');
 	}
 
 }

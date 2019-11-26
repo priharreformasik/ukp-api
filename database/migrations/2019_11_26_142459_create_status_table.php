@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateKeahlianPsikologTable extends Migration {
+class CreateStatusTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,10 +12,13 @@ class CreateKeahlianPsikologTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('keahlian_psikolog', function(Blueprint $table)
+		Schema::create('status', function(Blueprint $table)
 		{
 			$table->integer('id', true);
-			$table->string('deskripsi');
+			$table->string('nama');
+			$table->text('deskripsi', 65535)->nullable();
+			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 
@@ -27,7 +30,7 @@ class CreateKeahlianPsikologTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('keahlian_psikolog');
+		Schema::drop('status');
 	}
 
 }
