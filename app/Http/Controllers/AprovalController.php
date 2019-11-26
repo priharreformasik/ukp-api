@@ -79,7 +79,7 @@ class AprovalController extends Controller
       $psikolog = Psikolog::all();
       $status = Status::where('nama','Terjadwal')->orWhere('nama','Dibatalkan')->orWhere('nama','Pengalihan Psikolog')->get();
 
-      return view('pengaturan.aproval_edit',compact('data','sesi','klien','layanan','ruangan','psikolog','status','dataTes'));
+      return view('pengaturan.aproval_edit',compact('data','sesi','klien','layanan','ruangan','psikolog','status'));
     }
 
     public function update(Request $request,$id)

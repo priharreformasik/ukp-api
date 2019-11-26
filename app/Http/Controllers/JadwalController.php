@@ -405,7 +405,7 @@ class JadwalController extends Controller
       // dd($arr_layanan);
       // $psikolog = User::all()->where('level','Psikolog')->sortBy('name');
       $status = Status::where('nama','Terjadwal')->orWhere('nama','Selesai')->orWhere('nama','Dibatalkan')->get();
-      return view('jadwal.jadwal_add' , compact('sesi','klien','layanan', 'arr_layanan', 'x', 'tes','ruangan','psikolog','status','request'));
+      return view('jadwal.jadwal_add' , compact('sesi','klien','layanan', 'ruangan','psikolog','status','request'));
     }   
 
     
