@@ -54,6 +54,7 @@
                         <tr>
                             <th class="text-center" width="30px;">NO</th>
                             <th class="text-center">RUANGAN</th>
+                            <th class="text-center">LAYANAN</th>
                             <th class="text-center">DESKRIPSI</th>
                             <th class="text-center" width="100px;">ACTION</th>
                         </tr>
@@ -63,6 +64,10 @@
                             <tr>
                                 <td align="center">{{$value+1}}</td>
                                 <td>{{$ruangan->nama}}</td>
+                                <td> @foreach($ruangan->layanan as $value)
+                                  <li>{{$value->nama}}</li>
+                                     @endforeach
+                                </td>
                                 <td>{{$ruangan->deskripsi}}</td>
                                 <td align="center">
                                     <div>

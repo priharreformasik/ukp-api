@@ -446,6 +446,41 @@ class JadwalController extends Controller
       return response()->json($list);
     }
 
+    public function layananSesi_web(Request $request){
+      $sesi = [];
+      $status = Status::where('nama','Terjadwal')->first()->id;
+      $jadwal_layanan = Jadwal::select('sesi_id')->where('tanggal',$request->tanggal)->where('psikolog_id',$request->psikolog_id)->where('status_id',$status)->get();
+      
+      foreach ($jadwal_layanan as $key => $value) {
+        $sesi[] = $value->sesi_id;
+      }
+      
+      $list = Sesi::whereHas('layanan', function ($layanan) use ($request,$sesi) 
+      {
+        $layanan->where('layanan_id', $request->layanan_id)
+                ->whereNotIn('sesi_id',$sesi);
+      })->get();
+
+      return response()->json($list);
+    }
+
+    public function layananRuangan_web(Request $request){
+      $ruangan = [];
+      $status = Status::where('nama','Terjadwal')->first()->id;
+      $ruangan_layanan = Jadwal::select('ruangan_id')->where('layanan_id',$request->layanan_id)->where('tanggal',$request->tanggal)->where('sesi_id',$request->sesi_id)->where('status_id',$status)->get();
+      
+      foreach ($ruangan_layanan as $key => $value) {
+        $ruangan[] = $value->ruangan_id;
+      }
+
+      $list = Ruangan::whereHas('layanan', function ($layanan) use ($request,$ruangan) 
+      {
+        $layanan->where('layanan_id', $request->layanan_id)
+                ->whereNotIn('ruangan_id',$ruangan);
+      })->get();
+
+      return response()->json($list);
+    }
 
     public function store(Request $request)
     {

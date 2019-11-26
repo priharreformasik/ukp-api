@@ -47,7 +47,7 @@
                   </div>
               </div>                
               <div class="row pl-5 pr-5" style="margin-top: 5px; padding-bottom:10px;">
-                   <div class="col-md-4">
+                   <div class="col-md-2">
                       <p>Layanan</p>
                   </div>
                   <div class="col-md-8">
@@ -58,7 +58,6 @@
                     </select>
                   </div>
               </div>       
-
           </div>
           <div class="row mt-3">
                 <div class="col-lg" style="text-align: center ; padding-bottom:10px;">

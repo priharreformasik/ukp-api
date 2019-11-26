@@ -189,5 +189,7 @@ Route::middleware('api')->get('/dashboard', function()
 });
 
 Route::middleware('api')->get('/layananPsikolog/web','JadwalController@layananPsikolog_web');
+Route::middleware('api')->get('/layananSesi/web','JadwalController@layananSesi_web');
+Route::middleware('api')->get('/layananRuangan/web','JadwalController@layananRuangan_web');
 Route::middleware('api')->get('/jadwal/status', 'JadwalController@ubah_status');
 Route::middleware('api')->get('/pesanUser','PesanController@pesanUser');

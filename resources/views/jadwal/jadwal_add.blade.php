@@ -41,7 +41,7 @@
                       <div class="col-md-8">
                           <div class="input-group">
                               <span class="input-group-addon"><i class="icon ion-calendar tx-16 lh-0 op-6"></i></span>
-                              <input name="tanggal" type="text" class="form-control fc-datepicker datepicker" placeholder="yyyy-mm-dd" data-date-format="yyyy-mm-dd" value="{{old('tanggal')}}">
+                              <input id="tanggal" name="tanggal" type="text" class="form-control fc-datepicker datepicker" placeholder="yyyy-mm-dd" data-date-format="yyyy-mm-dd" value="{{old('tanggal')}}">
                           </div>
                       </div>
               </div>
@@ -72,11 +72,7 @@
                       <p>Sesi</p>
                   </div>
                   <div class="col-md-8">
-                    <select class="form-control select2" name="sesi_id">
-                        <option value="">Pilih Sesi</option>
-                        @foreach($sesi as $value)
-                            <option value="{{$value->id}}" {{collect(old('sesi'))->contains($value->id) ? 'selected':''}}>{{$value->jam}}</option>
-                        @endforeach
+                    <select class="form-control select2" name="sesi_id" id="sesi">              
                     </select>
                   </div>
               </div> 
@@ -106,11 +102,7 @@
                       <p>Ruangan</p>
                   </div>
                   <div class="col-md-8">
-                    <select class="form-control select2" name="ruangan_id">
-                        <option value="">Pilih Ruangan</option>
-                        @foreach($ruangan as $value)
-                            <option value="{{$value->id}}" {{collect(old('ruangan'))->contains($value->id) ? 'selected':''}}>{{$value->nama}}</option>
-                        @endforeach
+                    <select class="form-control select2" name="ruangan_id" id="ruangan">
                     </select>
                   </div>
               </div> 
@@ -191,19 +183,47 @@
     </script>
     <script>
       $('#layanan').on('change', function(e) {
-                var id_layanan = e.target.value;
-                console.log(id_layanan);
+          var id_layanan = e.target.value;
 
-                $.get('/api/layananPsikolog/web?layanan_id=' + id_layanan, function(data) {
-                    console.log(data);
-                    $('#psikolog').empty();
-                    $('#psikolog').append('<option value="0" disabled="true" selected="true">Pilih Psikolog</option>');
+          $.get('/api/layananPsikolog/web?layanan_id=' + id_layanan, function(data) {
+              $('#psikolog').empty();
+              $('#psikolog').append('<option value="0" disabled="true" selected="true">Pilih Psikolog</option>');
 
-                    $.each(data, function(index, user){
-                        $('#psikolog').append('<option value="'+ user.psikolog.id +'">'+ user.name +'</option>');
-                    })
-                });
-            });    
+              $.each(data, function(index, user){
+                  $('#psikolog').append('<option value="'+ user.psikolog.id +'">'+ user.name +'</option>');
+              })
+          });
+      });  
+
+      $('#psikolog').on('change', function(e) {
+          var id_layanan = $('#layanan').val();
+          var id_psikolog = e.target.value;
+          var tanggal = $('#tanggal').val();
+
+          $.get('/api/layananSesi/web?layanan_id=' + id_layanan + '&' + 'psikolog_id=' + id_psikolog + '&' + 'tanggal=' + tanggal, function(data) {
+              $('#sesi').empty();
+              $('#sesi').append('<option value="0" disabled="true" selected="true">Pilih Sesi</option>');
+
+              $.each(data, function(index, sesi){
+                  $('#sesi').append('<option value="'+ sesi.id +'">'+ sesi.nama +'</option>');
+              })
+          });
+      });  
+
+      $('#sesi').on('change', function(e) {
+          var id_layanan = $('#layanan').val();
+          var id_sesi = e.target.value;
+          var tanggal = $('#tanggal').val();
+
+          $.get('/api/layananRuangan/web?layanan_id=' + id_layanan + '&' + 'sesi_id=' + id_sesi + '&' + 'tanggal=' + tanggal, function(data) {
+              $('#ruangan').empty();
+              $('#ruangan').append('<option value="0" disabled="true" selected="true">Pilih Ruangan</option>');
+
+              $.each(data, function(index, ruangan){
+                  $('#ruangan').append('<option value="'+ ruangan.id +'">'+ ruangan.nama +'</option>');
+              })
+          });
+      });
       </script>
 
 @endsection

@@ -11,6 +11,7 @@ use Auth;
 use File;
 use Alert;
 use Carbon\Carbon;
+use App\Layanan;
 
 class RuanganController extends Controller
 {
@@ -75,7 +76,7 @@ class RuanganController extends Controller
       Ruangan::create([
         'nama' => request('nama'),
         'deskripsi' => request('deskripsi')
-      ]);
+      ])->layanan()->attach($request->layanan_id);
       Alert::success('Berhasil!','Data Berhasil Ditambahkan');
       return redirect('data/ruangan');
     }   
