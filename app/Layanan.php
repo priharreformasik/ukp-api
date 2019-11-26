@@ -26,12 +26,12 @@ class Layanan extends Model
 
     public function sesi()
     {
-        return $this->hasMany('App\Sesi', 'layanan_id', 'id');
+        return $this->belongsToMany('App\Sesi', 'layanan_sesi','sesi_id','layanan_id');
     }
 
     public function ruangan()
     {
-        return $this->hasMany('App\Ruangan', 'layanan_id', 'id');
+        return $this->belongsToMany('App\Ruangan', 'layanan_ruangan','ruangan_id','layanan_id');
     }
 
     public function asesmen()
