@@ -25,5 +25,10 @@ class DatabaseSeeder extends Seeder
         $user->no_telepon = '087987987877';
         $user->foto = null;
         $user->save();
+        $this->call(LayananTableSeeder::class);
+        $this->call(RuanganTableSeeder::class);
+        $this->call(SesiTableSeeder::class);
+        $this->call(StatusTableSeeder::class);
+        $this->call(AsesmenChargeTableSeeder::class);
     }
 }
