@@ -31,7 +31,7 @@ class Layanan extends Model
 
     public function ruangan()
     {
-        return $this->hasMany('App\Ruangan', 'layanan_id', 'id');
+        return $this->belongsToMany('App\Ruangan', 'layanan_ruangan','ruangan_id','layanan_id');
     }
 
     public function asesmen()
