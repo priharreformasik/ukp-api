@@ -57,7 +57,8 @@ class RuanganController extends Controller
 
     public function create()
     {
-      return view('data.ruangan_add');
+      $layanan = Layanan::all()->sortBy('id');
+      return view('data.ruangan_add', compact('layanan'));
     }
 
     public function store(Request $request)

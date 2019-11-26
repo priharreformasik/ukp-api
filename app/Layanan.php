@@ -26,7 +26,7 @@ class Layanan extends Model
 
     public function sesi()
     {
-        return $this->hasMany('App\Sesi', 'layanan_id', 'id');
+        return $this->belongsToMany('App\Sesi', 'layanan_sesi','sesi_id','layanan_id');
     }
 
     public function ruangan()

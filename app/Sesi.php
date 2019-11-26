@@ -22,6 +22,6 @@ class Sesi extends Model
 
     public function layanan()
     {
-        return $this->belongsTo('App\Layanan', 'layanan_id', 'id');
+        return $this->belongsToMany('App\Layanan', 'layanan_sesi','sesi_id','layanan_id');
     }
 }

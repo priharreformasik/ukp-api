@@ -11,6 +11,7 @@ use Auth;
 use File;
 use Carbon\Carbon;
 use Alert;
+use App\Layanan;
 
 class SesiController extends Controller
 {
@@ -67,7 +68,8 @@ class SesiController extends Controller
 
     public function create()
     {
-      return view('data.sesi_add');
+      $layanan = Layanan::all()->sortBy('id');
+      return view('data.sesi_add', compact('layanan'));
     }    
 
     public function store(Request $request)
@@ -95,6 +97,7 @@ class SesiController extends Controller
         $data -> nama = $request->nama;
         $data -> jam = $request->jam1.' - '.$request->jam2;
         $data-> save();
+        $data->layanan()->attach($request->layanan_id);
         Alert::success('Berhasil!','Data Berhasil Ditambahkan');
         return redirect('data/sesi');
         

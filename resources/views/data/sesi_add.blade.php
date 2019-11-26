@@ -56,7 +56,20 @@
                     <input type="text" class="form-control"  id="timeformatExample2"  name="jam2" placeholder="00:00" value="{{old('jam2')}}">
                   </div>
               </div>                                          
-            </div>
+              </div>             
+                <div class="row pl-5 pr-5" style="margin-top: 5px; padding-bottom:10px;">
+                     <div class="col-md-4">
+                        <p>Layanan</p>
+                    </div>
+                    <div class="col-md-8">
+                      <select class="form-control select2" multiple="true" name="layanan_id[]" placeholder="Pilih Layanan">
+                          @foreach($layanan as $value)
+                              <option value="{{$value->id}}" {{collect(old('layanan'))->contains($value->id) ? 'selected':''}}>{{$value->nama}}</option>
+                          @endforeach
+                      </select>
+                    </div>
+                </div>       
+
           <div class="row mt-3">
                 <div class="col-lg" style="text-align: center ; padding-bottom:10px;">
                   <button type="button" class="btn btn-danger" onclick="location.href='{{url('data/sesi')}}'">Kembali</button>

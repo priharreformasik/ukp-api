@@ -40,6 +40,7 @@
                         <tr>
                             <th class="text-center" width="30px;">NO</th>
                             <th class="text-center">NAMA</th>
+                            <th class="text-center">LAYANAN</th>
                             <th class="text-center">JAM</th>
                             <th class="text-center" class="wd-10p" width="100px;">ACTION</th>
                         </tr>
@@ -49,6 +50,10 @@
                             <tr>
                                 <td align="center">{{$value+1}}</td>
                                 <td>{{$sesi->nama}}</td>
+                                <td> @foreach($sesi->layanan as $value)
+                                  <li>{{$value->nama}}</li>
+                                     @endforeach
+                                </td>
                                 <td>{{$sesi->jam}}</td>
                                 <td align="center">
                                     <div>

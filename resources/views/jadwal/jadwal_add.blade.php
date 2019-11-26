@@ -47,6 +47,28 @@
               </div>
               <div class="row pl-5 pr-5" style="margin-top: 5px;">
                   <div class="col-md-4">
+                      <p>Layanan</p>
+                  </div>
+                  <div class="col-md-8">
+                    <select class="form-control select2" name="layanan_id" id="layanan">
+                        <option value="">Pilih Layanan</option>
+                        @foreach($layanan as $value)
+                            <option value="{{$value->id}}" {{collect(old('layanan'))->contains($value->id) ? 'selected':''}}>{{$value->nama}}</option>
+                        @endforeach
+                    </select>
+                  </div>
+              </div> 
+              <div class="row pl-5 pr-5" style="margin-top: 5px; ">
+                  <div class="col-md-4">
+                      <p>Nama Psikolog</p>
+                  </div>
+                  <div class="col-md-8">
+                    <select class="form-control select2" name="psikolog_id" id='psikolog'>
+                    </select>
+                  </div>
+              </div> 
+              <div class="row pl-5 pr-5" style="margin-top: 5px;">
+                  <div class="col-md-4">
                       <p>Sesi</p>
                   </div>
                   <div class="col-md-8">
@@ -79,28 +101,6 @@
                     <textarea class="form-control" name="keluhan" placeholder="Keluhan">{{old('keluhan')}}</textarea>
                   </div>
               </div>
-              <div class="row pl-5 pr-5" style="margin-top: 5px;">
-                  <div class="col-md-4">
-                      <p>Layanan</p>
-                  </div>
-                  <div class="col-md-8">
-                    <select class="form-control select2" name="layanan_id" id="layanan">
-                        <option value="">Pilih Layanan</option>
-                        @foreach($layanan as $value)
-                            <option value="{{$value->id}}" {{collect(old('layanan'))->contains($value->id) ? 'selected':''}}>{{$value->nama}}</option>
-                        @endforeach
-                    </select>
-                  </div>
-              </div> 
-              <div class="row pl-5 pr-5" style="margin-top: 5px; ">
-                  <div class="col-md-4">
-                      <p>Nama Psikolog</p>
-                  </div>
-                  <div class="col-md-8">
-                    <select class="form-control select2" name="psikolog_id" id='psikolog'>
-                    </select>
-                  </div>
-              </div> 
               <div class="row pl-5 pr-5" style="margin-top: 5px;">
                   <div class="col-md-4">
                       <p>Ruangan</p>
