@@ -88,9 +88,16 @@ class RuanganController extends Controller
     }*/
     public function edit($id)
     {
-    $data = Ruangan::findOrFail($id);
-    return view('data.ruangan_edit',compact('data'));
-    //print_r($data);
+      $data = Ruangan::where('id', $id)
+                    ->with(['layanan' => function($q){
+                      $q->select('nama')->get()->toArray();
+                    }])
+                    ->first();
+                    // dd($data);
+      $dataLayanan = DB::table('layanan_ruangan')->where('ruangan_id', $data->id)->get()->pluck('layanan_id');
+      // dd($dataLayanan);
+      $layanan = Layanan::all();
+      return view('data.ruangan_edit',compact('data','layanan', 'dataLayanan'));
     }
 
     public function update(Request $request,$id)

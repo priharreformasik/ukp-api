@@ -61,7 +61,19 @@
                   <div class="col-md-2">
                     <input type="text" class="form-control" name="jam2" id="timeformatExample2" placeholder="" value="{{ old('jam2') ? old('jam2') : $data->jam2 }}">
                   </div>
-              </div>                                      
+              </div>      
+              <div class="row pl-5 pr-5" style="margin-top: 5px;  padding-bottom:10px;">
+                  <div class="col-md-4">
+                      <p>Layanan</p>
+                  </div>
+                  <div class="col-md-8">
+                    <select class="form-control select2" multiple="true" name="layanan_id[]">
+                       @foreach($layanan as $value)
+                           <option value="{{$value->id}}" {{collect(old('layanan'))->contains($value->id) ? 'selected':''}} {{collect($dataLayanan)->contains($value->id) ? 'selected':''}}>{{$value->n</option>
+                       @endforeach
+                    </select>
+                  </div>
+              </div>                                
           </div>
               <div class="row mt-3">
                 <div class="col-lg" style="text-align: center ; padding-bottom:10px;">
