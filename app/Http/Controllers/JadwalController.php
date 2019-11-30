@@ -605,7 +605,7 @@ class JadwalController extends Controller
       $psikolog = Psikolog::all();
       $status = Status::where('nama','Terjadwal')->orWhere('nama','Selesai')->orWhere('nama','Dibatalkan')->get();
 
-      return view('jadwal.jadwal_edit',compact('data','sesi','klien','layanan','ruangan','psikolog','status','dataTes'));
+      return view('jadwal.jadwal_edit',compact('data','sesi','klien','layanan','ruangan','psikolog','status'));
     //print_r($data);
     }
 

@@ -85,19 +85,39 @@ public $successStatus = 200;
 
     }
 
-    public function riwayat_konsultasi(Request $request){
+    // public function riwayat_konsultasi(Request $request){
 
-      $list = Jadwal::whereHas('psikolog', function($data) use($request)
-      {
-        $data->where('psikolog_id', $request->psikolog_id)->orderBy('nama', 'asc');
-      })->select('jadwal.*')
-        ->leftjoin('status','status.id','=','jadwal.status_id')
-        ->where('status.nama','=','Selesai')
-        ->with(['status','layanan','klien.user','sesi','ruangan'])->get();
-        // dd($list);
-        return response()->json(
-          ['jadwal'=>$list]);
+    //   $list = Jadwal::whereHas('psikolog', function($data) use($request)
+    //   {
+    //     $data->where('psikolog_id', $request->psikolog_id)->orderBy('nama', 'asc');
+    //   })->select('jadwal.*')
+    //     ->leftjoin('status','status.id','=','jadwal.status_id')
+    //     ->where('status.nama','=','Selesai')
+    //     ->with(['status','layanan','klien.user','sesi','ruangan'])->get();
+    //     // dd($list);
+    //     return response()->json(
+    //       ['jadwal'=>$list]);
 
+    // }
+
+    public function riwayat_konsultasi(){
+
+      $psikolog = User::find(Auth::user()->id)->psikolog()->first()->id;
+
+      $list = DB::table('jadwal')->where('psikolog_id', $psikolog)
+                      ->leftjoin('status','status.id','=','jadwal.status_id')
+                      ->leftjoin('sesi','sesi.id','=','jadwal.sesi_id')
+                      ->leftjoin('ruangan','ruangan.id','=','jadwal.ruangan_id')
+                      ->leftjoin('layanan','layanan.id','=','jadwal.layanan_id')                      
+                      ->leftjoin('klien','klien.id','=','jadwal.klien_id')                    
+                      ->leftjoin('users','users.id','=','klien.user_id')
+                      ->select('jadwal.*','users.name as Klien','layanan.nama as Layanan','ruangan.nama as Ruangan','sesi.nama as Sesi','sesi.jam as Jam')
+                      ->where('status.nama','=','Selesai')
+                      ->get();
+                        // dd($list);
+      return response()->json(
+        ['jadwal'=>$list]
+      );
     }
 
 
@@ -126,8 +146,8 @@ public $successStatus = 200;
                       ->leftjoin('ruangan','ruangan.id','=','jadwal.ruangan_id')
                       ->leftjoin('layanan','layanan.id','=','jadwal.layanan_id')                      
                       ->leftjoin('klien','klien.id','=','jadwal.klien_id')                    
-                      ->leftjoin('users as user_klien','users.id','=','klien.user_id')
-                      ->select('jadwal.*','user_klien.name','layanan.nama as Layanan','ruangan.nama as Ruangan','sesi.nama as Sesi','sesi.jam as Jam')
+                      ->leftjoin('users','users.id','=','klien.user_id')
+                      ->select('jadwal.*','users.name as Klien','layanan.nama as Layanan','ruangan.nama as Ruangan','sesi.nama as Sesi','sesi.jam as Jam')
                       ->where('status.nama','=','Terjadwal')
                       ->orWhere('status.nama','=','Menunggu Konfirmasi')
                       // ->with(['status','layanan','klien.user','sesi','ruangan'])

@@ -15,6 +15,7 @@ use Validator;
 use App\Lib\Helper;
 use Carbon\Carbon;
 use Hash;
+use DB;
 
 
 class KlienController extends Controller
@@ -27,7 +28,6 @@ public function register(Request $request)
         'name' => 'required',
         'email' => 'required|email|unique:users',
         'password' => 'required',
-        //'c_password' => 'required|same:password',
         'username' => 'required|unique:users',
         'no_telepon' => 'required|unique:users',
     ]);
@@ -43,10 +43,6 @@ public function register(Request $request)
                 'level'=>'Klien',
                 'username'=>$request->username,
                 'tanggal_lahir' =>$request->tanggal_lahir,
-                /*'nik'=>$request->nik,
-                
-                'jenis_kelamin' =>$request->jenis_kelamin,
-                'alamat' =>$request->alamat,*/
                 'no_telepon'=>$request->no_telepon,
                 ])->klien()->create([
                     // 'anak_ke' => $request->anak_ke,
@@ -54,7 +50,7 @@ public function register(Request $request)
                    // 'pendidikan_terakhir' => $request->pendidikan_terakhir,
                      'kategori_id' => $request->kategori_id,
                 //'foto'=>$request->foto,
-            ]);
+                ]);
     return response()->json([
         'status'=>'success',
         'result'=>$user
@@ -227,52 +223,75 @@ public function update_foto(Request $request,$id)
 
     }
 
+        // public function riwayat_konsultasi(Request $request){
 
-    // public function konsultasi_klien($id){
-    //     $jadwal = Klien::where('id',$id)
-    //                     ->with('jadwal.sesi','jadwal.ruangan','jadwal.psikolog.user','jadwal.layanan','jadwal.klien.kategori')
-    //                     ->first();
-    //     if(! $jadwal){
-    //         return response()->json([
-    //             'message' => 'Konsultasi not found',
-    //         ]);
-    //     }
-    //     return response()->json([
-    //         'status'=>'success',
-    //         'result'=>$jadwal
+        //   $list = Jadwal::whereHas('klien', function($data) use($request)
+        //   {
+        //     $data->where('klien_id', $request->klien_id)->orderBy('nama', 'asc');
+        //   })->select('jadwal.*')
+        //     ->leftjoin('status','status.id','=','jadwal.status_id')
+        //     ->where('status.nama','=','Selesai')
+        //     ->with(['klien.user','status','layanan','psikolog.user','sesi','ruangan'])->get();
+        //     // dd($list);
+        //     return response()->json(
+        //       ['jadwal'=>$list]);
+        // }
 
-    //     ]);
-    // }
+      public function riwayat_konsultasi(){
 
-        public function riwayat_konsultasi(Request $request){
+      $klien = User::find(Auth::user()->id)->klien()->first()->id;
 
-          $list = Jadwal::whereHas('klien', function($data) use($request)
-          {
-            $data->where('klien_id', $request->klien_id)->orderBy('nama', 'asc');
-          })->select('jadwal.*')
-            ->leftjoin('status','status.id','=','jadwal.status_id')
-            ->where('status.nama','=','Selesai')
-            ->with(['klien.user','status','layanan','psikolog.user','sesi','ruangan'])->get();
-            // dd($list);
-            return response()->json(
-              ['jadwal'=>$list]);
-        }
+      $list = DB::table('jadwal')->where('klien_id', $klien)
+                      ->leftjoin('status','status.id','=','jadwal.status_id')
+                      ->leftjoin('sesi','sesi.id','=','jadwal.sesi_id')
+                      ->leftjoin('ruangan','ruangan.id','=','jadwal.ruangan_id')
+                      ->leftjoin('layanan','layanan.id','=','jadwal.layanan_id')                      
+                      ->leftjoin('psikolog','psikolog.id','=','jadwal.psikolog_id')                    
+                      ->leftjoin('users','users.id','=','psikolog.user_id')
+                      ->select('jadwal.*','users.name as Psikolog','layanan.nama as Layanan','ruangan.nama as Ruangan','sesi.nama as Sesi','sesi.jam as Jam')
+                      ->where('status.nama','=','Selesai')
+                      ->get();
+                        // dd($list);
+      return response()->json(
+        ['jadwal'=>$list]
+      );
+    }
 
-        public function jadwal_konsultasi(Request $request){
+    public function jadwal_konsultasi(){
 
-          $list = Jadwal::whereHas('klien', function($data) use($request)
-          {
-            $data->where('klien_id', $request->klien_id)->orderBy('nama', 'asc');
-          })->select('jadwal.*')
-            ->leftjoin('status','status.id','=','jadwal.status_id')
-            ->where(function($query){
-               $query->where('status.nama','=','Terjadwal');
-             })
-            ->with(['klien.user','status','layanan','psikolog.user','sesi','ruangan'])->get();
-            // dd($list);
-          return response()->json(
-            ['jadwal'=>$list]);
-        }
+      $klien = User::find(Auth::user()->id)->klien()->first()->id;
+
+      $list = DB::table('jadwal')->where('klien_id', $klien)
+                      ->leftjoin('status','status.id','=','jadwal.status_id')
+                      ->leftjoin('sesi','sesi.id','=','jadwal.sesi_id')
+                      ->leftjoin('ruangan','ruangan.id','=','jadwal.ruangan_id')
+                      ->leftjoin('layanan','layanan.id','=','jadwal.layanan_id')                      
+                      ->leftjoin('psikolog','psikolog.id','=','jadwal.psikolog_id')                    
+                      ->leftjoin('users','users.id','=','psikolog.user_id')
+                      ->select('jadwal.*','users.name as Psikolog','layanan.nama as Layanan','ruangan.nama as Ruangan','sesi.nama as Sesi','sesi.jam as Jam')
+                      ->where('status.nama','=','Terjadwal')
+                      ->get();
+                        // dd($list);
+      return response()->json(
+        ['jadwal'=>$list]
+      );
+    }
+
+        // public function jadwal_konsultasi(Request $request){
+
+        //   $list = Jadwal::whereHas('klien', function($data) use($request)
+        //   {
+        //     $data->where('klien_id', $request->klien_id)->orderBy('nama', 'asc');
+        //   })->select('jadwal.*')
+        //     ->leftjoin('status','status.id','=','jadwal.status_id')
+        //     ->where(function($query){
+        //        $query->where('status.nama','=','Terjadwal');
+        //      })
+        //     ->with(['klien.user','status','layanan','psikolog.user','sesi','ruangan'])->get();
+        //     // dd($list);
+        //   return response()->json(
+        //     ['jadwal'=>$list]);
+        // }
 
         public function riwayat_konsultasiChild(Request $request){
 

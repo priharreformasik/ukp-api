@@ -104,7 +104,7 @@ Route::put('/psikolog/update_user/{id}', 'API\PsikologController@update_user');
 Route::put('/psikolog/update_biodata/{id}', 'API\PsikologController@update_biodata');
 
 Route::put('/psikolog/update_layanan/{id}', 'API\PsikologController@update_layanan');
-Route::middleware('api')->get('/psikolog/riwayat','API\PsikologController@riwayat_konsultasi');
+Route::middleware('auth:api')->get('/psikolog/riwayat','API\PsikologController@riwayat_konsultasi');
 Route::middleware('auth:api')->get('/psikolog/jadwal','API\PsikologController@jadwal_konsultasi');
 Route::middleware('api')->get('/psikolog/permintaan_klien','API\PsikologController@permintaan_klien');
 Route::middleware('api')->get('/psikolog/cari_klien','API\PsikologController@cari_klien');
@@ -125,8 +125,8 @@ Route::get('/klien/list/','API\KlienController@list');
 Route::get('/klien/child','API\KlienController@show_child');
 Route::put('/klien/update_foto/{id}', 'API\KlienController@update_foto');
 
-Route::middleware('api')->get('/klien/riwayat','API\KlienController@riwayat_konsultasi');
-Route::middleware('api')->get('/klien/jadwal','API\KlienController@jadwal_konsultasi');
+Route::middleware('auth:api')->get('/klien/riwayat','API\KlienController@riwayat_konsultasi');
+Route::middleware('auth:api')->get('/klien/jadwal','API\KlienController@jadwal_konsultasi');
 Route::middleware('api')->get('/klien/riwayatChild','API\KlienController@riwayat_konsultasiChild');
 Route::middleware('api')->get('/klien/jadwalChild','API\KlienController@jadwal_konsultasiChild');
 Route::middleware('api')->get('/klien/konfirmasi_konsultasi','API\KlienController@konfirmasi_konsultasi');
