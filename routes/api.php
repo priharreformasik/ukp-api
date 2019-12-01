@@ -193,3 +193,4 @@ Route::middleware('api')->get('/layananSesi/web','JadwalController@layananSesi_w
 Route::middleware('api')->get('/layananRuangan/web','JadwalController@layananRuangan_web');
 Route::middleware('api')->get('/jadwal/status', 'JadwalController@ubah_status');
 Route::middleware('api')->get('/pesanUser','PesanController@pesanUser');
+Route::middleware('api')->get('/ukp','UkpController@list');
