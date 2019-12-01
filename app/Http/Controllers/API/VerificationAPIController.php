@@ -46,33 +46,16 @@ class VerificationAPIController extends Controller
      */
     public function verify(Request $request)
     {
-      $user = Auth::user();
-      $users = User::where('id', Auth::user()->id)->first();
+      $user =  User::where('id',$request->id)->first();
+
       if ($user->email_verified_at) {
-        return response()->json([
-          'status'  => 'success',
-          'message' => 'Email has been verified',
-          'result' => $users
-        ]);
+        return response()->json('Email has been verified');
       } else {
-        if ($request->verification_code == $user->remember_token) {
-          $user->email_verified_at = Carbon::now();
-          $user->remember_token = null;
-          // $user->status = 'Active';
-          $user->save();
-          return response()->json([
-            'status'  => 'success',
-            'message' => 'Email has been successfully verified',
-            'result' => $users
-          ]);
-        }
-        else {
-          return response()->json([
-            'status'  => 'failed',
-            'message' => 'Verification code is wrong!',
-            'result' => $users
-          ]);
-        }
+        $user->email_verified_at = Carbon::now();
+        $user->remember_token = null;
+        $user->status = 'Approved';
+        $user->save();
+        return response()->json('Email has been verified');
       }
     }
 
@@ -84,30 +67,19 @@ class VerificationAPIController extends Controller
      */
     public function resend()
     {
-        $user = Auth::user();
-        // $users = User::where('id', Auth::user()->id)->first();
-        if ($user->email_verified_at) {
-          return response()->json([
-            'status'  => 'failed',
-            'message' => 'Email has been verified',
-            'result' => $user
-          ]);
-        } else {
-          $otp = mt_rand(111111, 999999);
-          $user->remember_token = $otp;//agar yg dikirim tersimpan kedalam user ke remember token
-          $user->save();
-
-          // $pesan = $request->pesan;
-
-          $user->notify(new EmailVerification($otp));//untuk kirim email
-
-          return response()->json([
-            'status'  => 'sent',
-            'message' => 'Email has been sent',
-            'result' => $user
-          ]);
-        }
-
+      $user = Auth::user();
+      if ($user->email_verified_at) {
+        return response()->json([
+          'status'  => 'failed',
+          'message' => 'Email has been verified',
+        ]);
+      } else {
+        $user->sendEmailVerificationNotification();
+        return response()->json([
+          'status'  => 'success',
+          'message' => 'The notification has been resubmitted',
+        ]);
+      }
     }
 
     /**
@@ -115,8 +87,8 @@ class VerificationAPIController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth:api');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth:api');
+    // }
 }

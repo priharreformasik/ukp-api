@@ -2,57 +2,15 @@
 
 namespace App\Notifications;
 
-use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
+namespace App\Notifications;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Auth\Notifications\VerifyEmail as VerifyEmailBase;
 
-class EmailVerification extends Notification
+class EmailVerification extends VerifyEmailBase
 {
-    use Queueable;
-
-    /**
-     * Create a new notification instance.
-     *
-     * @return void
-     */
-    public function __construct($otp)
+    protected function verificationUrl($notifiable)
     {
-        $this->otp = $otp;
-    }
-
-    /**
-     * Get the notification's delivery channels.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function via($notifiable)
-    {
-        return ['mail'];
-    }
-
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
-    public function toMail($notifiable)
-    {
-        return (new MailMessage)->markdown('mail.EmailVerification',['otp'=>$this->otp]);
-    }
-
-    /**
-     * Get the array representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return array
-     */
-    public function toArray($notifiable)
-    {
-        return [
-            //
-        ];
+        return URL::temporarySignedRoute('verificationapi.verify', Carbon::now()->addMinutes(60), ['id' => $notifiable->getKey()]); // this will basically mimic the email endpoint with get request
     }
 }

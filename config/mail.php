@@ -57,7 +57,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'ukpugm@ridwan.info'),
-        'name' => env('MAIL_FROM_NAME', 'ukp ugm'),
+        'name' => env('MAIL_FROM_NAME', 'UKP UGM'),
     ],
 
     /*

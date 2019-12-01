@@ -149,9 +149,9 @@ Route::get('detail_psikolog/{id}', 'API\PsikologController@show_psikolog')->midd
 Route::post('forgot/password', 'API\ForgotPasswordController')->name('forgot.password');
 
 /*====VERIF EMAIL========*/
-  Route::get('email/verify', 'API\VerificationAPIController@show');
-  Route::post('email/verify', 'API\VerificationAPIController@verify');
-  Route::get('email/resend', 'API\VerificationAPIController@resend');
+  // Route::get('email/verify', 'API\VerificationAPIController@show');
+  Route::middleware('api')->get('email/verify', 'API\VerificationAPIController@verify')->name('verificationapi.verify');
+  Route::middleware('auth:api')->get('email/resend', 'API\VerificationAPIController@resend')->name('verificationapi.resend');
 
 
 /*DASHBOARD*/

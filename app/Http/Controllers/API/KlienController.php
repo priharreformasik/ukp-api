@@ -16,10 +16,11 @@ use App\Lib\Helper;
 use Carbon\Carbon;
 use Hash;
 use DB;
-
+use Illuminate\Foundation\Auth\VerifiesEmails;
 
 class KlienController extends Controller
 {
+use VerifiesEmails;
 public $successStatus = 200;
 
 public function register(Request $request)
@@ -44,7 +45,9 @@ public function register(Request $request)
                 'username'=>$request->username,
                 'tanggal_lahir' =>$request->tanggal_lahir,
                 'no_telepon'=>$request->no_telepon,
-                ])->klien()->create([
+                ]);
+              $user->sendEmailVerificationNotification();
+              $user->klien()->create([
                     // 'anak_ke' => $request->anak_ke,
                     // 'jumlah_saudara' => $request->jumlah_saudara,
                    // 'pendidikan_terakhir' => $request->pendidikan_terakhir,

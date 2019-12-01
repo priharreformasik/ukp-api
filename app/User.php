@@ -7,11 +7,9 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Notifications\VerifyEmail;
+use App\Notifications\EmailVerification;
 
-
-
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable, HasApiTokens;
     use SoftDeletes;
@@ -31,11 +29,9 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-
-
     public function sendEmailVerificationNotification()
     {
-        $this->notify(new VerifyEmail); // my notification
+        $this->notify(new EmailVerification); // my notification
     }
 
     public function psikolog()
