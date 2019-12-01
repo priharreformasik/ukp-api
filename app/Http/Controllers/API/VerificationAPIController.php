@@ -54,6 +54,7 @@ class VerificationAPIController extends Controller
         $user->email_verified_at = Carbon::now();
         $user->remember_token = null;
         $user->status = 'Approved';
+        $user->isActive = 'Aktif';
         $user->save();
         return response()->json('Email has been verified');
       }

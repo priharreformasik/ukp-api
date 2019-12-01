@@ -11,10 +11,12 @@ use Validator;
 use App\Lib\Helper;
 use App\Jadwal;
 use DB;
+use Illuminate\Foundation\Auth\VerifiesEmails;
 
 class PsikologController extends Controller
 {
 public $successStatus = 200;
+use VerifiesEmails;
 
     public function register(Request $request)
     {
@@ -45,7 +47,9 @@ public $successStatus = 200;
                     //'foto'=>$request->foto,
                     'isActive'=>'Tidak Aktif',
                     'status'=>'Not Approved',
-                ])->psikolog()->create([
+                ]);
+                $user->sendEmailVerificationNotification();
+                $user->psikolog()->create([
                     'gelar'=>$request->gelar,
                     'no_sipp'=>$request->no_sipp,
                     //'keahlian_id'=>$request->keahlian_id,
