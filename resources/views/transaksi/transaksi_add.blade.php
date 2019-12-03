@@ -23,9 +23,7 @@
           </div>
       @endif
       <!-- SELECT2 EXAMPLE -->
-      <div class="box box-default" style="padding-top: 30px; ">
-        <!-- /.box-header -->
-        {!! Form::open(array('url'=>'data/asesmen/simpan','method'=>'POST', 'files'=>'true','class'=>'form-horizontal'))!!}
+        <div class="box box-default" style="padding-top: 30px; ">
           <div class="box-body">
             <div class="col-md-6 pl-5 pr-5" style="float:left">
               <div class="row pl-5 pr-5" style="margin-top: 5px;">
@@ -52,24 +50,23 @@
                     <input type="number" class="form-control" name="harga" placeholder="Harga" value="{{old('harga')}}">
                   </div>
               </div>                                           
-          </div>
-          <div class="col-md-6 pl-5 pr-5">
-            Total :
-          </div>
-
-          <div class="row mt-3" style="">
-                <div class="col-lg" style="text-align: center ; padding-bottom:10px;">
-                  <button type="button" class="btn btn-danger" onclick="location.href='{{url('data/asesmen')}}'">Kembali</button>
-                  <button type="submit" class="btn btn-success">Simpan</button>
-                </div>
-          </div>
-        
+            </div>
+            <div class="col-md-6 pl-5 pr-5">
+              Total :
+            </div>
+            <div class="row mt-3" style="">
+              <div class="col-lg" style="text-align: center ; padding-bottom:10px;">
+                <button type="button" class="btn btn-danger" onclick="location.href='{{url('data/asesmen')}}'">Kembali</button>
+                <button type="submit" class="btn btn-success">Simpan</button>
+              </div>
+            </div>   
+          </div>   
         </div>
+
         <div class="box box-default" style="padding-top: 30px; ">
           <table id="datatable1" class="table table-bordered table-striped" >
             <thead>
               <tr>
-                <th class="text-center" width="10px;">NO</th>
                 <th class="text-center">ID</th>
                 <th class="text-center">LAYANAN</th>
                 <th class="text-center" width="300px;">ASESMEN/CHARGE</th>
@@ -77,21 +74,18 @@
                 <th class="text-center" class="wd-10p">ACTION</th>
               </tr>
             </thead>
-                <tbody> 
-                @foreach($list as $value => $asesmen)                         
-                    <tr>
-                        <td align="center">{{$value+1}}</td>
-                        <td>{{$asesmen->nama}}</td>
-                        <td>{{$asesmen->layanan['nama']}}</td>
-                        <td>{{$asesmen->deskripsi}}</td>
-                        <td>Rp {{ number_format($asesmen->harga,0,".",".") }}</td>
-                    </tr>  
-                @endforeach                                                             
-                </tbody>
+            <tbody>                        
+                <tr>
+                    <td align="center">1</td>
+                    <td>nama</td>
+                    <td>layanan</td>
+                    <td>harga</td>
+                    <td>x</td>
+                </tr>                                                            
+            </tbody>
           </table>
         </div>
-        {!!Form::close()!!}
-      </div>
+
     </section>
 @endsection
 
