@@ -387,6 +387,8 @@ public function update_foto(Request $request,$id)
                      ]);
                  }
 
+                 $list->foto = asset('images/'.$list->foto.'');
+
                  return response()->json([
                   'status' => 'Sukses',
                   'result' => $list
