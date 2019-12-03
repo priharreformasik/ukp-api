@@ -387,6 +387,14 @@ Route::get('/cari', 'Select2Controller@loadData');
 
 Route::get('welcome', 'PesanController@welcome');
 
+/*======= START OF TRANSACTION =======*/
+Route::group(['middleware' => ['isAdmin'], 'prefix' => 'transaksi'],function()
+{
+Route::get('/', 'TransaksiController@index');
+});
+/*======= END OF TRANSACTION =======*/
+
+
 
 
 
