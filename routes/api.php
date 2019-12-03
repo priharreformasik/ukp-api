@@ -98,7 +98,7 @@ Route::post('login/psikolog', 'API\UserController@loginPsikolog');
 Route::post('register/psikolog', 'API\PsikologController@register');
 Route::middleware('auth:api')->get('/psikolog', 'API\PsikologController@psikolog');
 Route::get('/psikolog/list/','API\PsikologController@list');
-Route::get('/psikolog/show/{id}','API\PsikologController@show');
+Route::middleware('auth:api')->get('/psikolog/show','API\PsikologController@show');
 Route::put('/psikolog/update/{id}', 'API\PsikologController@update_foto')->middleware('auth:api');
 Route::put('/psikolog/update_user/{id}', 'API\PsikologController@update_user');
 Route::put('/psikolog/update_biodata/{id}', 'API\PsikologController@update_biodata');

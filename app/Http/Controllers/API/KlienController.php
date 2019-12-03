@@ -379,21 +379,19 @@ public function update_foto(Request $request,$id)
                       ->leftjoin('users','users.id','=','klien.user_id')
                       ->select('users.*','klien.*')
                       ->first();
-                  // $klien = User::where('id',$id)->with('klien')->first();
-                //  $klien = Klien::where('id',$id)->with('user')->first();
-                 if (! $list) {
-                     return response()->json([
-                        'message' => 'Klien not found'
-                     ]);
-                 }
+              if (! $list) {
+                  return response()->json([
+                    'pesan' => 'Klien tidak ditemukan'
+                  ]);
+              }
 
-                 $list->foto = asset('images/'.$list->foto.'');
+              $list->foto = asset('images/'.$list->foto.'');
 
-                 return response()->json([
-                  'status' => 'Sukses',
-                  'result' => $list
-                ]);
-             }
+              return response()->json([
+                'status' => 'Sukses',
+                'result' => $list
+              ]);
+            }
              public function show_child(Request $request){
 
               $list = Klien::whereHas('parent', function($data) use($request)

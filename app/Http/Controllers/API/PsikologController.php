@@ -238,18 +238,27 @@ use VerifiesEmails;
         ]);
       }
 
-      public function show($id)
-       {
-            $psikolog = User::where('id',$id)->with('psikolog')->first();
-          //  $klien = Klien::where('id',$id)->with('user')->first();
-           if (! $psikolog) {
-               return response()->json([
-                  'message' => 'Psikolog not found'
-               ]);
-           }
+      public function show()
+      {
+        $psikolog = User::find(Auth::user()->id)->psikolog()->first()->id;
+        $list = DB::table('psikolog')->where('psikolog.id', $psikolog)                 
+                ->leftjoin('users','users.id','=','psikolog.user_id')
+                ->select('users.*','psikolog.*')
+                ->first();
+        if (! $list) {
+            return response()->json([
+              'pesan' => 'Psikolog tidak ditemukan'
+            ]);
+        }
 
-           return $psikolog;
-       }
+        $list->foto = asset('images/'.$list->foto.'');
+
+        return response()->json([
+          'status' => 'Sukses',
+          'result' => $list
+        ]);
+      }
+
 
     //   public function show_psikolog($id)
      //  {
