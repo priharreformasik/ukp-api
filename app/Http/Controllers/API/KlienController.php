@@ -377,7 +377,7 @@ public function update_foto(Request $request,$id)
               $klien = User::find(Auth::user()->id)->klien()->first()->id;
               $list = DB::table('klien')->where('klien.id', $klien)                 
                       ->leftjoin('users','users.id','=','klien.user_id')
-                      ->select('users.*','klien.*',)
+                      ->select('users.*','klien.*')
                       ->get();
                   // $klien = User::where('id',$id)->with('klien')->first();
                 //  $klien = Klien::where('id',$id)->with('user')->first();
