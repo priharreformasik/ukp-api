@@ -382,6 +382,8 @@ public function update_foto(Request $request,$id)
                      ]);
                  }
 
+                 $klien->foto = asset('images/'.$klien->foto.'');
+
                  return $klien;
              }
              public function show_child(Request $request){
