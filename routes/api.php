@@ -120,7 +120,7 @@ Route::middleware('auth:api')->get('/klien', 'API\KlienController@list');
 Route::post('/klien/store', 'API\KlienController@store');
 Route::put('/klien/update/{id}', 'API\KlienController@update');
 Route::put('/klien/update_user/{id}', 'API\KlienController@update_user');
-Route::get('/klien/show/{id}','API\KlienController@show');
+Route::middleware('auth:api')->get('/klien/show','API\KlienController@show');
 Route::get('/klien/list/','API\KlienController@list');
 Route::get('/klien/child','API\KlienController@show_child');
 Route::put('/klien/update_foto/{id}', 'API\KlienController@update_foto');

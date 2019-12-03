@@ -372,19 +372,25 @@ public function update_foto(Request $request,$id)
 
 
 
-            public function show($id)
-             {
-                  $klien = User::where('id',$id)->with('klien')->first();
+            public function show()
+            {
+              $klien = User::find(Auth::user()->id)->klien()->first()->id;
+              $list = DB::table('klien')->where('klien.id', $klien)                 
+                      ->leftjoin('users','users.id','=','klien.user_id')
+                      ->select('users.*','klien.*')
+                      ->get();
+                  // $klien = User::where('id',$id)->with('klien')->first();
                 //  $klien = Klien::where('id',$id)->with('user')->first();
-                 if (! $klien) {
+                 if (! $list) {
                      return response()->json([
                         'message' => 'Klien not found'
                      ]);
                  }
 
-                 $klien->foto = asset('images/'.$klien->foto.'');
-
-                 return $klien;
+                 return response()->json([
+                  'status' => 'Sukses',
+                  'result' => $list
+                ]);
              }
              public function show_child(Request $request){
 
