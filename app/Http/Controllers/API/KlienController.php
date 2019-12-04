@@ -251,6 +251,8 @@ public function update_foto(Request $request,$id)
                       ->leftjoin('layanan','layanan.id','=','jadwal.layanan_id')                      
                       ->leftjoin('psikolog','psikolog.id','=','jadwal.psikolog_id')                    
                       ->leftjoin('users','users.id','=','psikolog.user_id')
+                      ->leftjoin('klien as k1','k1.user_id','=','users.id')
+                      ->join('klien as k2','k1.id','=','k2.parent_id')
                       ->select('jadwal.*','users.name as Psikolog','layanan.nama as Layanan','ruangan.nama as Ruangan','sesi.nama as Sesi','sesi.jam as Jam')
                       ->where('status.nama','=','Selesai')
                       ->get();
