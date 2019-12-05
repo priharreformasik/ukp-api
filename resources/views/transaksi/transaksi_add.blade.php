@@ -54,6 +54,32 @@
             <div class="col-md-6 pl-5 pr-5">
               Total :
             </div>
+            <div class="col-md-12 pl-5 pr-5">
+              <div class="col-md-4 row pl-5 pr-5" style="margin-top: 5px;">
+                  <div class="col-md-4">
+                      <p>ID</p>
+                  </div>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control" name="nama" placeholder="Asesmen" value="{{old('nama')}}">
+                  </div>
+              </div>
+              <div class="col-md-4 row pl-5 pr-5" style="margin-top: 5px;">
+                  <div class="col-md-4">
+                      <p>Asesmen & Charge</p>
+                  </div>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control" name="nama" placeholder="Asesmen" value="{{old('nama')}}">
+                  </div>
+              </div>
+              <div class="col-md-4 row pl-5 pr-5" style="margin-top: 5px;">
+                  <div class="col-md-4">
+                      <p>Harga</p>
+                  </div>
+                  <div class="col-md-8">
+                    <input type="text" class="form-control" name="nama" placeholder="Asesmen" value="{{old('nama')}}">
+                  </div>
+              </div>
+            </div>
             <div class="row mt-3" style="">
               <div class="col-lg" style="text-align: center ; padding-bottom:10px;">
                 <button type="button" class="btn btn-danger" onclick="location.href='{{url('data/asesmen')}}'">Kembali</button>
