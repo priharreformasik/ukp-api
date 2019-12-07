@@ -57,7 +57,7 @@ class JadwalController extends Controller
               'layanan_id' => request('layanan_id'),
               'ruangan_id' => null,
               'psikolog_id' => request('psikolog_id'),
-              'status_id' => 6,
+              'status_id' => 2,
               'klien_id' => request('klien_id'),
               ]);
 
