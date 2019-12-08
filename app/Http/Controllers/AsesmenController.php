@@ -87,4 +87,8 @@ class AsesmenController extends Controller
       return response()->json(['success'=>"Data Deleted successfully.", 'tr'=>'tr_'.$id]);
     }
 
+    public function list_asesmen(Request $request){
+      $data = AsesmenCharge::all();
+      return response()->json($data);
+    }
 }

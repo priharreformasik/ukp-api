@@ -391,6 +391,8 @@ Route::get('welcome', 'PesanController@welcome');
 Route::group(['middleware' => ['isAdmin'], 'prefix' => 'transaksi'],function()
 {
 Route::get('/', 'TransaksiController@index');
+Route::get('/klien','KlienController@list_klien');
+Route::get('/asesmen','AsesmenController@list_asesmen');
 });
 /*======= END OF TRANSACTION =======*/
 

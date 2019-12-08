@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Klien;
 use App\User;
 use App\Kategori;
+use App\Jadwal;
 use Auth;
 use Alert;
 use File;
@@ -461,5 +462,11 @@ class KlienController extends Controller
     {
       $data = User::onlyTrashed($id)->first()->forceDelete();
       return "Success force delete";
+    }
+
+    public function list_klien(Request $request){
+      $date=date_create($request->tanggal);
+      $data = Jadwal::where('tanggal',$date)->where('status_id',7)->with('klien.user','transaksi')->get();
+      return response()->json($data);
     }
 }

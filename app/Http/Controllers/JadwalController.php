@@ -14,6 +14,7 @@ use App\Psikolog;
 use App\Sesi;
 use App\Status;
 use App\User;
+use App\Transaksi;
 use Auth;
 use File;
 use Alert;
@@ -558,6 +559,11 @@ class JadwalController extends Controller
           'status_id' => request('status_id'),
           'klien_id' => request('klien_id'),
         ]);
+
+        $transaksi = new Transaksi;
+        $transaksi->biaya_registrasi = Layanan::find($data->layanan_id)->first()->harga;
+        $transaksi->jadwal_id = $data->id;
+        $transaksi->save();
 
       if($request->status_id == 7){
 
