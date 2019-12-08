@@ -394,6 +394,8 @@ Route::get('/', 'TransaksiController@index');
 Route::get('/klien','KlienController@list_klien');
 Route::get('/asesmen','AsesmenController@list_asesmen');
 Route::get('/asesmen-harga','AsesmenController@list_asesmen_harga');
+Route::post('/','TransaksiController@store');
+
 });
 /*======= END OF TRANSACTION =======*/
 

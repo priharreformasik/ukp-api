@@ -1,4 +1,3 @@
-
 @extends('layout')
 
 @section('content-header')
@@ -13,6 +12,7 @@
     </section>
 @stop
 @section('content')
+{!! Form::open(array('url'=>'transaksi','method'=>'POST', 'files'=>'true','class'=>'form-horizontal'))!!}
     <section class="content">
       @if(count($errors)>0)
           <div class="alert alert-danger">
@@ -118,16 +118,16 @@
             </div>
             <div class="col-md-12 pl-5 pr-5">
               <div class="row pl-5 pr-5" style="margin-top: 5px; padding-left: 10px;">
-                  <button type="button" class="btn btn-danger" onclick="location.href='{{url('data/asesmen')}}'">Batal
+                  <button type="button" class="btn btn-danger" onclick="location.href='{{url('data/transaksi')}}'">Batal
                   </button>
-                 <button type="button" class="btn btn-success" onclick="location.href='{{url('data/asesmen')}}'">Simpan
-                  </button>
+                  <button type="submit" class="btn btn-success">Simpan</button>
               </div> 
             </div>
           </div>   
         </div>
-
     </section>
+{!!Form::close()!!}
+
 @endsection
 
 @section('javascript')
@@ -151,7 +151,7 @@
             $('#klien').append('<option value="0" disabled="true" selected="true">Pilih Klien</option>');
 
             $.each(data, function(index, klien){
-                $('#klien').append('<option value="'+ klien.transaksi.id +'">'+ klien.klien.user.name +'</option>');
+                $('#klien').append('<option value="'+ klien.id +'">'+ klien.klien.user.name +'</option>');
             })
         });
     });
@@ -174,11 +174,10 @@
     var i=0;
     var total = 0;
     $('#tambah').on( 'click', function () {
-        // i++;
         $('#list-asesmen').append('<tr>'+
         '<td class="no"></td>'+
         '<td><input type="hidden" name="daftarAsesmen[]" value="'+$('select[name=asesmen]').val()+'">'+$('#asesmen').find('option:selected').text()+'</td>'+
-        '<td class="harga"><input type="hidden" name="harga[]" value="'+$('input[name=harga]').val()+'">'+$('input[name=harga]').val()+'</td>'+
+        '<td class="harga"><input type="hidden" name="hargaAsesmen[]" value="'+$('input[name=harga]').val()+'">'+$('input[name=harga]').val()+'</td>'+
         '<td><input type="button" class="btn btn-danger btn-sm" value="Delete"></td>'+'</tr>');
         $('td.no').text(function (i) {
           return i + 1;
