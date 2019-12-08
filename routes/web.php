@@ -393,6 +393,7 @@ Route::group(['middleware' => ['isAdmin'], 'prefix' => 'transaksi'],function()
 Route::get('/', 'TransaksiController@index');
 Route::get('/klien','KlienController@list_klien');
 Route::get('/asesmen','AsesmenController@list_asesmen');
+Route::get('/asesmen-harga','AsesmenController@list_asesmen_harga');
 });
 /*======= END OF TRANSACTION =======*/
 

@@ -91,4 +91,9 @@ class AsesmenController extends Controller
       $data = AsesmenCharge::all();
       return response()->json($data);
     }
+
+    public function list_asesmen_harga(Request $request){
+      $data = AsesmenCharge::find($request->id);
+      return response()->json($data);
+    }
 }

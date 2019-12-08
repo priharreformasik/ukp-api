@@ -65,7 +65,7 @@
                       <p>Harga</p>
                   </div>
                   <div class="col-md-8">
-                    <input type="number" class="form-control" id="harga" name="harga" placeholder="harga" value="{{old('harga')}}">
+                    <input disabled type="number" class="form-control" id="harga" name="harga" placeholder="harga" value="{{old('harga')}}">
                   </div>
               </div>
               <div class="col-md-2" style="margin-top: 5px;">
@@ -165,6 +165,11 @@
         })
     });
 
+    $('#asesmen').on('change', function(e) {
+        $.get('/transaksi/asesmen-harga?id=' + $(this).val(), function(data) {
+            $('#harga').val(data.harga);
+        });
+    });
 
     var i=0;
     var total = 0;
