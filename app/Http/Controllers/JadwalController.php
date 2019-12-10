@@ -50,7 +50,26 @@ class JadwalController extends Controller
 
     public function store_api(Request $request){
 
+      $ruangan = [];
+      $status = Status::where('nama','Terjadwal')->first()->id;
+      $ruangan_layanan = Jadwal::select('ruangan_id')->where('layanan_id',$request->layanan_id)->where('tanggal',$request->tanggal)->where('sesi_id',$request->sesi_id)->where('status_id',$status)->get();
+      
+      foreach ($ruangan_layanan as $key => $value) {
+        $ruangan[] = $value->ruangan_id;
+      }
 
+      $list = Ruangan::whereHas('layanan', function ($layanan) use ($request,$ruangan) 
+      {
+        $layanan->where('layanan_id', $request->layanan_id)
+                ->whereNotIn('ruangan_id',$ruangan);
+      })->get();
+
+      if (empty($list)) {
+          return response()->json([
+            'status'=>'success',
+            'result'=>'Jadwal tidak tersedia'
+          ]);
+      } else {
       $jadwal = Jadwal::create([
               'tanggal' =>$request->tanggal,
               'sesi_id' => request('sesi_id'),
@@ -88,7 +107,7 @@ class JadwalController extends Controller
                 'status'=>'success',
                 'result'=>$jadwal
         ]);
-
+      }
     }
 
     public function update_api(Request $request, $id){
@@ -485,49 +504,6 @@ class JadwalController extends Controller
 
     public function store(Request $request)
     {
-
-      $klien = Klien::where('klien.id',$request->klien_id)
-                      ->leftJoin('users','users.id','klien.user_id')->first();
-
-      $check = Jadwal::where('tanggal', $request->tanggal)
-                       ->where('psikolog_id', $request->psikolog_id)
-                       ->where('sesi_id', $request->sesi_id)
-                       ->where('ruangan_id', $request->ruangan_id)
-                       ->where('status_id', $request->status_id)
-                       ->first();
-
-      $check1 = Jadwal::where('tanggal', $request->tanggal)
-                       ->where('psikolog_id', $request->psikolog_id)
-                       ->where('status_id', $request->status_id)
-                       ->where('sesi_id', $request->sesi_id)
-                       ->first();
-
-      $check2 = Jadwal::where('tanggal', $request->tanggal)
-                       ->where('sesi_id', $request->sesi_id)
-                       ->where('ruangan_id', $request->ruangan_id)
-                       ->where('status_id', $request->status_id)
-                       ->first();
-
-      $check3 = Jadwal::leftjoin('klien','jadwal.klien_id','klien.id')
-                        ->leftjoin('users','users.id','klien.user_id')
-                        ->where('tanggal', $request->tanggal)
-                        ->where('status_id', $request->status_id)
-                        ->where('users.nik', $klien->nik)
-                        ->first();
-
-      if($check) {
-        Alert::warning('Peringatan!', 'Data Sudah Tersedia!');
-        return redirect()->back();
-      } else if ($check1) {
-        Alert::warning('Peringatan!', 'Psikolog dan sesi tidak tersedia!');
-        return redirect()->back();
-      } else if ($check2) {
-        Alert::warning('Peringatan!', 'Ruangan dan sesi tidak tersedia!');
-        return redirect()->back();
-      } else if ($check3) {
-        Alert::warning('Peringatan!', 'Klien sudah terdaftar ditanggal yang sama!');
-        return redirect()->back();
-      } else {
         $this->validate($request, [
           'tanggal' => 'required|date',
           'sesi_id' => 'required',
@@ -590,8 +566,7 @@ class JadwalController extends Controller
       Alert::success('Berhasil!','Data Berhasil Ditambahkan');
       return redirect('jadwal/'.$data->id.'/detail');
 
-          }
-      }
+    }
  
     public function show($id)
     {
