@@ -51,8 +51,11 @@ class JadwalController extends Controller
     public function store_api(Request $request){
 
       $ruangan = [];
-      $status = Status::where('nama','Terjadwal')->first()->id;
-      $ruangan_layanan = Jadwal::select('ruangan_id')->where('layanan_id',$request->layanan_id)->where('tanggal',$request->tanggal)->where('sesi_id',$request->sesi_id)->where('status_id',$status)->get();
+      $status_terjadwal = Status::where('nama','Terjadwal')->first()->id;
+      $status_menunggu = Status::where('nama','Menunggu Konfirmasi')->first()->id;
+      $id = [$status_terjadwal,$status_menunggu];
+
+      $ruangan_layanan = Jadwal::select('ruangan_id')->where('layanan_id',$request->layanan_id)->where('tanggal',$request->tanggal)->where('sesi_id',$request->sesi_id)->get();
       
       foreach ($ruangan_layanan as $key => $value) {
         $ruangan[] = $value->ruangan_id;
@@ -64,7 +67,7 @@ class JadwalController extends Controller
                 ->whereNotIn('ruangan_id',$ruangan);
       })->get();
 
-      if (empty($list)) {
+      if ($list->isEmpty()) {
           return response()->json([
             'status'=>'success',
             'result'=>'Jadwal tidak tersedia'
@@ -75,9 +78,9 @@ class JadwalController extends Controller
               'sesi_id' => request('sesi_id'),
               'keluhan' => request('keluhan'),
               'layanan_id' => request('layanan_id'),
-              'ruangan_id' => null,
+              'ruangan_id' => $list[0]->id,
               'psikolog_id' => request('psikolog_id'),
-              'status_id' => 2,
+              'status_id' => $status_menunggu,
               'klien_id' => request('klien_id'),
               ]);
 
