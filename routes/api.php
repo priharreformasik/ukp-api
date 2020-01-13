@@ -73,7 +73,7 @@ Route::middleware('auth:api')->put('/ruangan/update/{id}', 'RuanganController@up
 /*======================== END OF DATA MASTER ==============================*/
 /*==START JADWAL==*/
 Route::middleware('auth:api')->get('/jadwal', 'JadwalController@jadwal');
-Route::middleware('auth:api')->post('jadwal/store', 'JadwalController@store_api');
+Route::middleware('api')->post('jadwal/store', 'JadwalController@store_api');
 Route::middleware('auth:api')->put('jadwal/update/{id}', 'JadwalController@update_api');
 Route::middleware('auth:api')->put('jadwal/updatePsikolog/{id}', 'JadwalController@updateJadwal_psikolog');
 Route::middleware('auth:api')->put('jadwal/updatePsikolog5/{id}', 'JadwalController@updateJadwal_psikolog5');
