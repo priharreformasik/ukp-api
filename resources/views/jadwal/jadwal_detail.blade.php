@@ -31,8 +31,12 @@
               <table class="table display responsive nowrap ">
                   <tbody>
                     <tr>
-                        <td>Tanggal</td>
-                        <td>{{\Carbon\Carbon::parse($jadwal->tanggal)->format('l, j F Y')}}</td>
+                        <td>Tanggal Asesmen</td>
+                        <td>{{\Carbon\Carbon::parse($jadwal->tanggal_asesmen)->format('l, j F Y')}}</td>
+                    </tr>
+                    <tr>
+                        <td>Tanggal Konsultasi</td>
+                        <td>{{\Carbon\Carbon::parse($jadwal->tanggal_konsultasi)->format('l, j F Y')}}</td>
                     </tr>
                     <tr>
                         <td>Jam</td>

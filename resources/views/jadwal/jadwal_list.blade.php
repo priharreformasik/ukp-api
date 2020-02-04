@@ -51,7 +51,8 @@
                 <thead>
                         <tr>
                             <th class="text-center">NO</th>
-                            <th class="text-center">TANGGAL</th>
+                            <th class="text-center">TANGGAL ASESMEN</th>
+                            <th class="text-center">TANGGAL KONSULTASI</th>
                             <th class="text-center">JAM</th>
                             <th class="text-center">NAMA KLIEN</th>
                             <th class="text-center">RUANGAN</th>
@@ -65,7 +66,8 @@
                             <tr>
                                 <td align="center">{{$counter}}</td>
                                 @php $counter++; @endphp   
-                                <td>{{\Carbon\Carbon::parse($jadwal->tanggal)->format('l, j F Y')}}</td>
+                                <td>{{\Carbon\Carbon::parse($jadwal->tanggal_asesmen)->format('l, j F Y')}}</td>
+                                <td>{{\Carbon\Carbon::parse($jadwal->tanggal_konsultasi)->format('l, j F Y')}}</td>
                                 <td>{{$jadwal->sesi['jam']}}</td>
                                 <td>{{$jadwal->klien->user['name']}}</td>
                                 <td>{{$jadwal->ruangan['nama']}}</td>

@@ -50,12 +50,12 @@ class AprovalController extends Controller
     public function index()
     {
         $list= Jadwal::leftjoin('status','jadwal.status_id','=','status.id')
-                      ->select('jadwal.tanggal', 'jadwal.id','jadwal.sesi_id','jadwal.klien_id','jadwal.ruangan_id','jadwal.psikolog_id', 'status.nama','jadwal.keluhan','jadwal.layanan_id','jadwal.created_at')
+                      ->select('jadwal.tanggal_asesmen','jadwal.tanggal_konsultasi', 'jadwal.id','jadwal.sesi_id','jadwal.klien_id','jadwal.ruangan_id','jadwal.psikolog_id', 'status.nama','jadwal.keluhan','jadwal.layanan_id','jadwal.created_at')
                       ->Where('status.nama','=','Pengalihan Psikolog')
                       ->orWhere('status.nama','=','Menunggu Konfirmasi')
                       ->orWhere('status.nama','=','Konfirmasi')
                       ->orderBy('jadwal.created_at','desc')
-                      ->orderBy('tanggal','desc')
+                      ->orderBy('tanggal_asesmen','desc')
                       ->get();
 
         $counter = 1;

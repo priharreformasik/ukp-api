@@ -386,18 +386,18 @@ class JadwalController extends Controller
     {
       if($request->status == 'all' || !($request->status)){
         $list= Jadwal::leftjoin('status','jadwal.status_id','=','status.id')
-                      ->select('jadwal.tanggal', 'jadwal.id','jadwal.sesi_id','jadwal.klien_id','jadwal.ruangan_id','jadwal.psikolog_id', 'status.nama','jadwal.layanan_id','jadwal.keluhan')
+                      ->select('jadwal.tanggal_asesmen', 'jadwal.tanggal_konsultasi','jadwal.id','jadwal.sesi_id','jadwal.klien_id','jadwal.ruangan_id','jadwal.psikolog_id', 'status.nama','jadwal.layanan_id','jadwal.keluhan')
                       ->Where('status.nama','=','Selesai')
                       ->orWhere('status.nama','=','Terjadwal')
                       ->orWhere('status.nama','=','Dibatalkan')
                       ->orderBy('status.nama','=','Terjadwal')
-                      ->orderBy('tanggal','desc')
+                      ->orderBy('tanggal_asesmen','desc')
                       ->get();
         }else{
           $list= Jadwal::leftjoin('status','jadwal.status_id','=','status.id')
-                      ->select('jadwal.tanggal', 'jadwal.id','jadwal.sesi_id','jadwal.klien_id','jadwal.ruangan_id','jadwal.psikolog_id', 'status.nama','jadwal.layanan_id','jadwal.keluhan')
+                      ->select('jadwal.tanggal_asesmen', 'jadwal.tanggal_konsultasi', 'jadwal.id','jadwal.sesi_id','jadwal.klien_id','jadwal.ruangan_id','jadwal.psikolog_id', 'status.nama','jadwal.layanan_id','jadwal.keluhan')
                       ->Where('status.nama',$request->status)
-                      ->orderBy('tanggal','desc')
+                      ->orderBy('tanggal_asesmen','desc')
                       ->get();
         }
 
