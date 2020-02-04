@@ -36,7 +36,7 @@
             <div class="col-md-12 pl-5 pr-5">
               <div class="row pl-5 pr-5" style="margin-top: 5px;">
                   <div class="col-md-4">
-                      <p>Tanggal</p>
+                      <p>Tanggal Asesmen</p>
                   </div>
                       <div class="col-md-8">
                           <div class="input-group">

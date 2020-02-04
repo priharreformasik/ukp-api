@@ -53,11 +53,11 @@ class HomeController extends Controller
                                     ->where('ruangan_id',NULL)
                                     ->get();
         $list= Jadwal::leftjoin('status','jadwal.status_id','=','status.id')
-                      ->select('jadwal.tanggal', 'jadwal.id','jadwal.sesi_id','jadwal.klien_id','jadwal.ruangan_id','jadwal.psikolog_id', 'status.nama','jadwal.layanan_id','jadwal.keluhan')
-                      ->where('jadwal.tanggal','=',Carbon::today())
+                      ->select('jadwal.tanggal_konsultasi', 'jadwal.id','jadwal.sesi_id','jadwal.klien_id','jadwal.ruangan_id','jadwal.psikolog_id', 'status.nama','jadwal.layanan_id','jadwal.keluhan')
+                      ->where('jadwal.tanggal_konsultasi','=',Carbon::today())
                       ->where('status.nama','=','Terjadwal')
                       ->orderBy('status.nama','=','Terjadwal')
-                      ->orderBy('tanggal','desc')
+                      ->orderBy('tanggal_konsultasi','desc')
                       ->get();
 
         $counter = 1;
@@ -73,7 +73,7 @@ class HomeController extends Controller
                 DB::raw('layanan.nama as nama'),
                 ])
             ->where('status.nama','=','Selesai')
-            ->whereYear('jadwal.tanggal', '=', date('Y'))
+            ->whereYear('jadwal.tanggal_konsultasi', '=', date('Y'))
             ->groupBy('jadwal.layanan_id','layanan.nama')
             // ->orderBy('count','desc')
             ->orderBy('nama','asc')
@@ -108,7 +108,7 @@ class HomeController extends Controller
                 DB::raw('layanan.nama as nama'),
               ])
             ->where('status.nama','=','Selesai')
-            ->whereMonth('jadwal.tanggal', '=', date('m'))
+            ->whereMonth('jadwal.tanggal_konsultasi', '=', date('m'))
             ->groupBy('jadwal.layanan_id','layanan.nama')
             // ->orderBy('count','desc')
             ->orderBy('nama','asc')
@@ -142,8 +142,8 @@ class HomeController extends Controller
                 DB::raw('layanan.nama as nama'),
               ])
             ->where('status.nama','=','Selesai')
-            ->whereBetween('jadwal.tanggal', [Carbon::now()->startOfWeek(),Carbon::now()->endOfWeek()])
-            // ->whereDate('jadwal.tanggal', '>=', date('Y-m-d H:i:s',strtotime('-7 days')) )
+            ->whereBetween('jadwal.tanggal_konsultasi', [Carbon::now()->startOfWeek(),Carbon::now()->endOfWeek()])
+            // ->whereDate('jadwal.tanggal_konsultasi', '>=', date('Y-m-d H:i:s',strtotime('-7 days')) )
             ->groupBy('jadwal.layanan_id','layanan.nama')
             // ->orderBy('count','desc')
             ->orderBy('nama','asc')
@@ -172,10 +172,10 @@ class HomeController extends Controller
         $thisStatistik = Jadwal::leftjoin('status','jadwal.status_id','=','status.id')
             ->select([
                 DB::raw('count(jadwal.id) as jumlah'),
-                DB::raw('DATE(jadwal.tanggal) as day'),
+                DB::raw('DATE(jadwal.tanggal_konsultasi) as day'),
               ])
             ->where('status.nama','=','Selesai')
-            ->whereMonth('jadwal.tanggal', '=', date('m'))
+            ->whereMonth('jadwal.tanggal_konsultasi', '=', date('m'))
             ->groupBy('day')
             ->get();
 
@@ -210,29 +210,29 @@ class HomeController extends Controller
         /*=================Jadwal Tahunan==========*/
         // $title = 'Jadwal';
         // $konsultasi1 = Jadwal::leftjoin('status','jadwal.status_id','=','status.id')->where('status.nama','=','Selesai')
-        //                   ->whereYear('tanggal', date('Y'))->whereMonth('tanggal','01')->count();
+        //                   ->whereYear('tanggal_konsultasi', date('Y'))->whereMonth('tanggal_konsultasi','01')->count();
         // $konsultasi2 = Jadwal::leftjoin('status','jadwal.status_id','=','status.id')->where('status.nama','=','Selesai')
-        //                   ->whereYear('tanggal', date('Y'))->whereMonth('tanggal','02')->count();
+        //                   ->whereYear('tanggal_konsultasi', date('Y'))->whereMonth('tanggal_konsultasi','02')->count();
         // $konsultasi2= Jadwal::leftjoin('status','jadwal.status_id','=','status.id')->where('status.nama','=','Selesai')
-        //                   ->whereYear('tanggal', date('Y'))->whereMonth('tanggal','03')->count();
+        //                   ->whereYear('tanggal_konsultasi', date('Y'))->whereMonth('tanggal_konsultasi','03')->count();
         // $konsultasi3 = Jadwal::leftjoin('status','jadwal.status_id','=','status.id')->where('status.nama','=','Selesai')
-        //                   ->whereYear('tanggal', date('Y'))->whereMonth('tanggal','04')->count();
+        //                   ->whereYear('tanggal_konsultasi', date('Y'))->whereMonth('tanggal_konsultasi','04')->count();
         // $konsultasi4 = Jadwal::leftjoin('status','jadwal.status_id','=','status.id')->where('status.nama','=','Selesai')
-        //                   ->whereYear('tanggal', date('Y'))->whereMonth('tanggal','05')->count();
+        //                   ->whereYear('tanggal_konsultasi', date('Y'))->whereMonth('tanggal_konsultasi','05')->count();
         // $konsultasi5 = Jadwal::leftjoin('status','jadwal.status_id','=','status.id')->where('status.nama','=','Selesai')
-        //                   ->whereYear('tanggal', date('Y'))->whereMonth('tanggal','06')->count();
+        //                   ->whereYear('tanggal_konsultasi', date('Y'))->whereMonth('tanggal_konsultasi','06')->count();
         // $konsultasi6 = Jadwal::leftjoin('status','jadwal.status_id','=','status.id')->where('status.nama','=','Selesai')
-        //                   ->whereYear('tanggal', date('Y'))->whereMonth('tanggal','07')->count();
+        //                   ->whereYear('tanggal_konsultasi', date('Y'))->whereMonth('tanggal_konsultasi','07')->count();
         // $konsultasi7 = Jadwal::leftjoin('status','jadwal.status_id','=','status.id')->where('status.nama','=','Selesai')
-        //                   ->whereYear('tanggal', date('Y'))->whereMonth('tanggal','08')->count();
+        //                   ->whereYear('tanggal_konsultasi', date('Y'))->whereMonth('tanggal_konsultasi','08')->count();
         // $konsultasi8 = Jadwal::leftjoin('status','jadwal.status_id','=','status.id')->where('status.nama','=','Selesai')
-        //                   ->whereYear('tanggal', date('Y'))->whereMonth('tanggal','09')->count();
+        //                   ->whereYear('tanggal_konsultasi', date('Y'))->whereMonth('tanggal_konsultasi','09')->count();
         // $konsultasi9 = Jadwal::leftjoin('status','jadwal.status_id','=','status.id')->where('status.nama','=','Selesai')
-        //                   ->whereYear('tanggal', date('Y'))->whereMonth('tanggal','10')->count();
+        //                   ->whereYear('tanggal_konsultasi', date('Y'))->whereMonth('tanggal_konsultasi','10')->count();
         // $konsultasi10 = Jadwal::leftjoin('status','jadwal.status_id','=','status.id')->where('status.nama','=','Selesai')
-        //                   ->whereYear('tanggal', date('Y'))->whereMonth('tanggal','11')->count();
+        //                   ->whereYear('tanggal_konsultasi', date('Y'))->whereMonth('tanggal_konsultasi','11')->count();
         // $konsultasi12 = Jadwal::leftjoin('status','jadwal.status_id','=','status.id')->where('status.nama','=','Selesai')
-        //                   ->whereYear('tanggal', date('Y'))->whereMonth('tanggal','12')->count();
+        //                   ->whereYear('tanggal_konsultasi', date('Y'))->whereMonth('tanggal_konsultasi','12')->count();
         
         //                   // dd($jadwal1);
         // $chart1 = \Charts::title([
@@ -319,7 +319,7 @@ class HomeController extends Controller
 
         public function update(Request $request,$id)
         {
-           $check = Jadwal::where('tanggal', $request->tanggal)
+           $check = Jadwal::where('tanggal_konsultasi', $request->tanggal_konsultasi)
                            ->where('psikolog_id', $request->psikolog_id)
                            ->where('sesi_id', $request->sesi_id)
                            ->where('ruangan_id', $request->ruangan_id)
@@ -327,14 +327,14 @@ class HomeController extends Controller
                            ->where('jadwal.id','!=',$request->id)
                            ->first();
 
-          $check1 = Jadwal::where('tanggal', $request->tanggal)
+          $check1 = Jadwal::where('tanggal_konsultasi', $request->tanggal_konsultasi)
                            ->where('psikolog_id', $request->psikolog_id)
                            ->where('sesi_id', $request->sesi_id)
                            ->where('status_id', $request->status_id)
                            ->where('jadwal.id','!=',$request->id)
                            ->first();
 
-          $check2 = Jadwal::where('tanggal', $request->tanggal)
+          $check2 = Jadwal::where('tanggal_konsultasi', $request->tanggal_konsultasi)
                            ->where('sesi_id', $request->sesi_id)
                            ->where('ruangan_id', $request->ruangan_id)
                            ->where('status_id', $request->status_id)
@@ -355,7 +355,7 @@ class HomeController extends Controller
             return redirect()->back();
           } else {
           $this->validate($request, [
-          'tanggal' => 'required|date',
+          'tanggal_konsultasi' => 'required|date',
           'sesi_id' => 'required',
           'keluhan' => 'required',
           'layanan_id' => 'required',
@@ -363,7 +363,7 @@ class HomeController extends Controller
           'status_id' => 'required'
         ],
         [
-          'tanggal.required' => 'Tanggal tidak boleh kosong!',
+          'tanggal_konsultasi.required' => 'Tanggal tidak boleh kosong!',
           'sesi_id.required' => 'Sesi tidak boleh kosong!',
           'keluhan.required' => 'Keluhan tidak boleh kosong!',
           'layanan_id.required' => 'Layanan tidak boleh kosong!',
@@ -371,7 +371,7 @@ class HomeController extends Controller
           'status_id.required' => 'Status tidak boleh kosong!',
         ]);
           $data = Jadwal::find($id);
-          $data->tanggal=$request->tanggal;
+          $data->tanggal_konsultasi=$request->tanggal_konsultasi;
           $data->sesi_id=$request->get('sesi_id');
           $data->klien_id = $request->get('klien_id');
           $data->keluhan=$request->get('keluhan');
